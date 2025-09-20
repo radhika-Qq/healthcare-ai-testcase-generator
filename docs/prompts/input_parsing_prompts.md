@@ -304,3 +304,4 @@ Query: [SQL_QUERY]
 ```
 
 These prompts are designed to work with various AI models and can be customized based on specific healthcare domain requirements and compliance standards.
+

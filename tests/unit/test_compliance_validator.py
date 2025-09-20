@@ -432,3 +432,4 @@ class TestComplianceValidator:
             assert 'critical_areas' in requirements
             assert isinstance(requirements['required_evidence'], list)
             assert isinstance(requirements['critical_areas'], list)
+

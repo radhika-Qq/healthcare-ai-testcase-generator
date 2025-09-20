@@ -102,3 +102,4 @@ class TestDocumentParser:
         """Test supported formats list."""
         expected_formats = ['.pdf', '.docx', '.doc', '.xml', '.html']
         assert self.parser.supported_formats == expected_formats
+

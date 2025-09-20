@@ -567,3 +567,4 @@ class TraceabilityMatrixGenerator:
         """Get current timestamp for matrix generation."""
         from datetime import datetime
         return datetime.now().isoformat()
+

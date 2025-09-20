@@ -226,3 +226,4 @@ class TestTestCaseGenerator:
         assert len(test_case.test_steps) == 1
         assert test_case.test_steps[0].step_number == 1
         assert test_case.test_steps[0].action == 'Login to system'
+

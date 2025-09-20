@@ -167,3 +167,4 @@ class TestRequirementExtractor:
         assert summary['by_priority']['critical'] == 1
         assert 'HIPAA' in summary['compliance_refs']
         assert 'GDPR' in summary['compliance_refs']
+

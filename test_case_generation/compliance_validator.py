@@ -552,3 +552,4 @@ class ComplianceValidator:
             recommendations.append(f"{rec} (applies to {count} test cases)")
             
         return recommendations
+

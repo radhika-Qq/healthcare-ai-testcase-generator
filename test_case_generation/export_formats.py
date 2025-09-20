@@ -531,3 +531,4 @@ class ExportManager:
         credentials = f"{username}:{password}"
         encoded_credentials = base64.b64encode(credentials.encode()).decode()
         return encoded_credentials
+
