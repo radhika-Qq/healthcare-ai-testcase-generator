@@ -34,6 +34,10 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Disable Streamlit's automatic rerun and polling
+st.set_option('deprecation.showPyplotGlobalUse', False)
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
 # Custom CSS and JavaScript
 st.markdown("""
 <style>
