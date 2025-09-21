@@ -157,23 +157,23 @@ def main():
                                 
                                 st.success("✅ Document parsed successfully!")
                                 
-                        except Exception as e:
-                            error_msg = str(e)
-                            st.error(f"❌ Error parsing document: {error_msg}")
-                            
-                            # Provide specific guidance based on error type
-                            if "zip file" in error_msg.lower() or "not a zip file" in error_msg.lower():
-                                st.info("💡 This error usually occurs when the file is corrupted or in an unsupported format. Please try:")
-                                st.markdown("""
-                                - **Re-save the document** in a supported format (PDF, Word, or text)
-                                - **Check if the file is corrupted** by opening it in its native application
-                                - **Try a different file** to test if the issue persists
-                                - **Use the sample documents** provided in the right panel
-                                """)
-                            elif "unsupported file format" in error_msg.lower():
-                                st.info("💡 Please use one of these supported formats: PDF, DOCX, DOC, XML, HTML, or TXT")
-                            else:
-                                st.info("💡 Try with a different file or check the file format")
+                            except Exception as e:
+                                error_msg = str(e)
+                                st.error(f"❌ Error parsing document: {error_msg}")
+                                
+                                # Provide specific guidance based on error type
+                                if "zip file" in error_msg.lower() or "not a zip file" in error_msg.lower():
+                                    st.info("💡 This error usually occurs when the file is corrupted or in an unsupported format. Please try:")
+                                    st.markdown("""
+                                    - **Re-save the document** in a supported format (PDF, Word, or text)
+                                    - **Check if the file is corrupted** by opening it in its native application
+                                    - **Try a different file** to test if the issue persists
+                                    - **Use the sample documents** provided in the right panel
+                                    """)
+                                elif "unsupported file format" in error_msg.lower():
+                                    st.info("💡 Please use one of these supported formats: PDF, DOCX, DOC, XML, HTML, or TXT")
+                                else:
+                                    st.info("💡 Try with a different file or check the file format")
                             finally:
                                 # Clean up temp file
                                 Path(temp_path).unlink(missing_ok=True)
