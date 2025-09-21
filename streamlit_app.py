@@ -157,8 +157,22 @@ def main():
                                 
                                 st.success("✅ Document parsed successfully!")
                                 
-                            except Exception as e:
-                                st.error(f"❌ Error parsing document: {str(e)}")
+                        except Exception as e:
+                            error_msg = str(e)
+                            st.error(f"❌ Error parsing document: {error_msg}")
+                            
+                            # Provide specific guidance based on error type
+                            if "zip file" in error_msg.lower() or "not a zip file" in error_msg.lower():
+                                st.info("💡 This error usually occurs when the file is corrupted or in an unsupported format. Please try:")
+                                st.markdown("""
+                                - **Re-save the document** in a supported format (PDF, Word, or text)
+                                - **Check if the file is corrupted** by opening it in its native application
+                                - **Try a different file** to test if the issue persists
+                                - **Use the sample documents** provided in the right panel
+                                """)
+                            elif "unsupported file format" in error_msg.lower():
+                                st.info("💡 Please use one of these supported formats: PDF, DOCX, DOC, XML, HTML, or TXT")
+                            else:
                                 st.info("💡 Try with a different file or check the file format")
                             finally:
                                 # Clean up temp file
@@ -190,7 +204,13 @@ def main():
                                 st.session_state.compliance_mappings = result.get('compliance_mappings', [])
                                 st.success("✅ Sample document loaded!")
                             except Exception as e:
-                                st.error(f"❌ Error loading sample: {str(e)}")
+                                error_msg = str(e)
+                                st.error(f"❌ Error loading sample: {error_msg}")
+                                
+                                if "zip file" in error_msg.lower() or "not a zip file" in error_msg.lower():
+                                    st.info("💡 Sample document appears to be corrupted. Please try uploading your own document or contact support.")
+                                else:
+                                    st.info("💡 There was an issue loading the sample document. Please try uploading your own document.")
                             finally:
                                 st.session_state.processing = False
                     else:

@@ -119,6 +119,16 @@ class RequirementExtractor:
             logger.warning("AI model not available, falling back to rule-based extraction")
             return self._extract_with_rules(text, parsed_doc)
             
+        # Clean and validate text before processing
+        if not text or not text.strip():
+            logger.warning("Empty text provided, falling back to rule-based extraction")
+            return self._extract_with_rules(text, parsed_doc)
+            
+        # Check if text contains binary data or looks like a zip file
+        if self._is_binary_content(text):
+            logger.warning("Binary content detected, falling back to rule-based extraction")
+            return self._extract_with_rules(text, parsed_doc)
+            
         prompt = self._create_extraction_prompt(text)
         
         try:
@@ -127,10 +137,20 @@ class RequirementExtractor:
                 text = text[:100000]
                 logger.warning("Text truncated to fit model limits")
                 
+            # Add safety check for model availability
+            if not hasattr(self.model, 'generate_content'):
+                logger.error("AI model does not have generate_content method, falling back to rule-based extraction")
+                return self._extract_with_rules(text, parsed_doc)
+                
             response = self.model.generate_content(prompt)
             
             if not response or not response.text:
                 logger.warning("Empty response from AI model, falling back to rule-based extraction")
+                return self._extract_with_rules(text, parsed_doc)
+                
+            # Validate response text
+            if self._is_binary_content(response.text):
+                logger.warning("AI model returned binary content, falling back to rule-based extraction")
                 return self._extract_with_rules(text, parsed_doc)
                 
             requirements_data = json.loads(response.text)
@@ -159,6 +179,40 @@ class RequirementExtractor:
         except Exception as e:
             logger.error(f"AI extraction failed: {str(e)}")
             return self._extract_with_rules(text, parsed_doc)
+    
+    def _is_binary_content(self, text: str) -> bool:
+        """Check if text contains binary content or looks like a zip file."""
+        if not text:
+            return False
+            
+        # Check for common binary file signatures
+        binary_signatures = [
+            b'PK\x03\x04',  # ZIP file signature
+            b'PK\x05\x06',  # ZIP file signature
+            b'PK\x07\x08',  # ZIP file signature
+            b'\x50\x4b\x03\x04',  # ZIP file signature (hex)
+            b'\x50\x4b\x05\x06',  # ZIP file signature (hex)
+        ]
+        
+        # Convert text to bytes for checking
+        try:
+            text_bytes = text.encode('utf-8', errors='ignore')
+            for signature in binary_signatures:
+                if signature in text_bytes:
+                    return True
+        except:
+            pass
+            
+        # Check for high ratio of non-printable characters
+        try:
+            printable_chars = sum(1 for c in text if c.isprintable() or c.isspace())
+            total_chars = len(text)
+            if total_chars > 0 and printable_chars / total_chars < 0.7:
+                return True
+        except:
+            pass
+            
+        return False
             
     def _create_extraction_prompt(self, text: str) -> str:
         """Create prompt for AI-based requirement extraction."""
