@@ -70,11 +70,17 @@ class RequirementExtractor:
         self.api_key = api_key
         self.project_id = project_id
         
-        if genai and api_key:
-            genai.configure(api_key=api_key)
-            self.model = genai.GenerativeModel('gemini-pro')
-        else:
-            logger.warning("Google Generative AI not available. Using rule-based extraction.")
+        try:
+            if genai and api_key:
+                genai.configure(api_key=api_key)
+                self.model = genai.GenerativeModel('gemini-pro')
+                logger.info("Google Generative AI initialized successfully")
+            else:
+                logger.warning("Google Generative AI not available. Using rule-based extraction.")
+                self.model = None
+        except Exception as e:
+            logger.error(f"Failed to initialize Google AI model: {str(e)}")
+            logger.warning("Falling back to rule-based extraction.")
             self.model = None
             
     def extract_requirements(self, parsed_doc: Dict[str, Any]) -> List[Requirement]:
@@ -109,10 +115,24 @@ class RequirementExtractor:
         
     def _extract_with_ai(self, text: str, parsed_doc: Dict[str, Any]) -> List[Requirement]:
         """Extract requirements using AI."""
+        if not self.model:
+            logger.warning("AI model not available, falling back to rule-based extraction")
+            return self._extract_with_rules(text, parsed_doc)
+            
         prompt = self._create_extraction_prompt(text)
         
         try:
+            # Ensure text is not too long for the model
+            if len(text) > 100000:  # Limit text length
+                text = text[:100000]
+                logger.warning("Text truncated to fit model limits")
+                
             response = self.model.generate_content(prompt)
+            
+            if not response or not response.text:
+                logger.warning("Empty response from AI model, falling back to rule-based extraction")
+                return self._extract_with_rules(text, parsed_doc)
+                
             requirements_data = json.loads(response.text)
             
             requirements = []
@@ -133,6 +153,9 @@ class RequirementExtractor:
                 
             return requirements
             
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse AI response as JSON: {str(e)}")
+            return self._extract_with_rules(text, parsed_doc)
         except Exception as e:
             logger.error(f"AI extraction failed: {str(e)}")
             return self._extract_with_rules(text, parsed_doc)

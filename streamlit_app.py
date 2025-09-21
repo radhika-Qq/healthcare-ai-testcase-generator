@@ -67,6 +67,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+def get_enum_value(obj):
+    """Helper function to get string value from enum objects."""
+    if obj is None:
+        return ''
+    if hasattr(obj, 'value'):
+        return obj.value
+    return str(obj)
+
 def main():
     # Header
     st.markdown('<h1 class="main-header">🏥 Healthcare AI Test Case Generator</h1>', unsafe_allow_html=True)
@@ -74,7 +82,8 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.image("https://via.placeholder.com/200x100/2E86AB/FFFFFF?text=Healthcare+AI", width=200)
+        st.markdown("### 🏥 Healthcare AI")
+        st.markdown("---")
         st.markdown("### 🚀 Prototype Features")
         st.markdown("""
         **1. Document Parsing** 📄
@@ -91,8 +100,16 @@ def main():
         """)
         
         st.markdown("### 🔧 Configuration")
-        api_key = st.text_input("Google AI API Key", type="password", help="Enter your Google AI API key")
-        if api_key:
+        with st.form("api_key_form"):
+            api_key = st.text_input("Google AI API Key", type="password", help="Enter your Google AI API key")
+            submitted = st.form_submit_button("Save API Key")
+        
+        if submitted and api_key:
+            st.session_state.api_key = api_key
+            st.success("✅ API Key configured")
+        elif submitted and not api_key:
+            st.warning("⚠️ Please enter an API key")
+        elif 'api_key' in st.session_state and st.session_state.api_key:
             st.success("✅ API Key configured")
         else:
             st.warning("⚠️ API key required for full functionality")
@@ -124,25 +141,31 @@ def main():
                 st.success(f"✅ File uploaded: {uploaded_file.name}")
                 
                 # Parse button
-                if st.button("🔍 Parse Document", type="primary"):
-                    with st.spinner("Parsing document and extracting requirements..."):
-                        try:
-                            # Parse the document
-                            result = parse_healthcare_document(temp_path)
-                            
-                            # Store in session state
-                            st.session_state.parsed_data = result
-                            st.session_state.requirements = result.get('requirements', [])
-                            st.session_state.compliance_mappings = result.get('compliance_mappings', [])
-                            
-                            st.success("✅ Document parsed successfully!")
-                            
-                        except Exception as e:
-                            st.error(f"❌ Error parsing document: {str(e)}")
-                            st.info("💡 Try with a different file or check the file format")
-                        finally:
-                            # Clean up temp file
-                            Path(temp_path).unlink(missing_ok=True)
+                if st.button("🔍 Parse Document", type="primary", key="parse_uploaded"):
+                    # Check if already processing to prevent duplicate calls
+                    if 'processing' not in st.session_state or not st.session_state.processing:
+                        st.session_state.processing = True
+                        with st.spinner("Parsing document and extracting requirements..."):
+                            try:
+                                # Parse the document
+                                result = parse_healthcare_document(temp_path, st.session_state.get('api_key'))
+                                
+                                # Store in session state
+                                st.session_state.parsed_data = result
+                                st.session_state.requirements = result.get('requirements', [])
+                                st.session_state.compliance_mappings = result.get('compliance_mappings', [])
+                                
+                                st.success("✅ Document parsed successfully!")
+                                
+                            except Exception as e:
+                                st.error(f"❌ Error parsing document: {str(e)}")
+                                st.info("💡 Try with a different file or check the file format")
+                            finally:
+                                # Clean up temp file
+                                Path(temp_path).unlink(missing_ok=True)
+                                st.session_state.processing = False
+                    else:
+                        st.warning("⚠️ Document is already being processed. Please wait...")
         
         with col2:
             st.markdown("#### 📋 Sample Document")
@@ -153,20 +176,28 @@ def main():
             - Pharmacy Management
             """)
             
-            if st.button("📥 Use Sample Document"):
-                sample_path = "sample_demo_data/medical_device_requirements.txt"
-                if Path(sample_path).exists():
-                    with st.spinner("Loading sample document..."):
-                        try:
-                            result = parse_healthcare_document(sample_path)
-                            st.session_state.parsed_data = result
-                            st.session_state.requirements = result.get('requirements', [])
-                            st.session_state.compliance_mappings = result.get('compliance_mappings', [])
-                            st.success("✅ Sample document loaded!")
-                        except Exception as e:
-                            st.error(f"❌ Error loading sample: {str(e)}")
+            if st.button("📥 Use Sample Document", key="use_sample"):
+                # Check if already processing to prevent duplicate calls
+                if 'processing' not in st.session_state or not st.session_state.processing:
+                    st.session_state.processing = True
+                    sample_path = "sample_demo_data/medical_device_requirements.txt"
+                    if Path(sample_path).exists():
+                        with st.spinner("Loading sample document..."):
+                            try:
+                                result = parse_healthcare_document(sample_path, st.session_state.get('api_key'))
+                                st.session_state.parsed_data = result
+                                st.session_state.requirements = result.get('requirements', [])
+                                st.session_state.compliance_mappings = result.get('compliance_mappings', [])
+                                st.success("✅ Sample document loaded!")
+                            except Exception as e:
+                                st.error(f"❌ Error loading sample: {str(e)}")
+                            finally:
+                                st.session_state.processing = False
+                    else:
+                        st.error("❌ Sample document not found")
+                        st.session_state.processing = False
                 else:
-                    st.error("❌ Sample document not found")
+                    st.warning("⚠️ Document is already being processed. Please wait...")
         
         # Display parsed results
         if 'requirements' in st.session_state and st.session_state.requirements:
@@ -180,26 +211,81 @@ def main():
             with col2:
                 st.metric("Functional", summary.get('by_type', {}).get('functional', 0))
             with col3:
-                st.metric("Compliance Refs", summary.get('compliance_refs', 0))
+                compliance_refs = summary.get('compliance_refs', [])
+                compliance_count = len(compliance_refs) if isinstance(compliance_refs, list) else 0
+                st.metric("Compliance Refs", compliance_count)
             with col4:
                 st.metric("High Priority", summary.get('by_priority', {}).get('high', 0))
             
-            # Requirements table
+            # Requirements table with pagination
             if st.session_state.requirements:
+                # Pagination controls
+                col1, col2, col3 = st.columns([1, 2, 1])
+                
+                with col1:
+                    items_per_page = st.selectbox(
+                        "Items per page",
+                        [10, 25, 50, 100, "All"],
+                        index=0,
+                        key="req_items_per_page"
+                    )
+                    if items_per_page == "All":
+                        items_per_page = total_requirements
+                
+                with col2:
+                    total_requirements = len(st.session_state.requirements)
+                    total_pages = (total_requirements + items_per_page - 1) // items_per_page
+                    
+                    if 'req_current_page' not in st.session_state:
+                        st.session_state.req_current_page = 1
+                    
+                    if total_pages > 1:
+                        current_page = st.selectbox(
+                            f"Page (1-{total_pages})",
+                            range(1, total_pages + 1),
+                            index=st.session_state.req_current_page - 1,
+                            key="req_page_selector"
+                        )
+                        st.session_state.req_current_page = current_page
+                    else:
+                        st.session_state.req_current_page = 1
+                
+                with col3:
+                    if st.button("🔄 Refresh", key="refresh_req"):
+                        st.session_state.req_current_page = 1
+                        st.rerun()
+                
+                # Calculate pagination
+                start_idx = (st.session_state.req_current_page - 1) * items_per_page
+                end_idx = min(start_idx + items_per_page, total_requirements)
+                
+                # Prepare data for current page
                 req_data = []
-                for req in st.session_state.requirements[:10]:  # Show first 10
-                    req_data.append({
-                        'ID': getattr(req, 'id', 'N/A'),
-                        'Description': getattr(req, 'description', 'N/A')[:100] + '...',
-                        'Type': getattr(req, 'type', 'N/A'),
-                        'Priority': getattr(req, 'priority', 'N/A')
-                    })
+                for req in st.session_state.requirements[start_idx:end_idx]:
+                    # Handle both dictionary and object formats
+                    if isinstance(req, dict):
+                        req_data.append({
+                            'ID': req.get('id', 'N/A'),
+                            'Description': req.get('description', 'N/A')[:100] + '...',
+                            'Type': req.get('type', 'N/A'),
+                            'Priority': req.get('priority', 'N/A')
+                        })
+                    else:
+                        req_data.append({
+                            'ID': getattr(req, 'id', 'N/A'),
+                            'Description': getattr(req, 'description', 'N/A')[:100] + '...',
+                            'Type': getattr(req, 'type', 'N/A'),
+                            'Priority': getattr(req, 'priority', 'N/A')
+                        })
                 
                 df = pd.DataFrame(req_data)
                 st.dataframe(df, use_container_width=True)
                 
-                if len(st.session_state.requirements) > 10:
-                    st.info(f"Showing first 10 of {len(st.session_state.requirements)} requirements")
+                # Pagination info
+                if total_pages > 1:
+                    st.info(f"Showing {start_idx + 1}-{end_idx} of {total_requirements} requirements (Page {st.session_state.req_current_page} of {total_pages})")
+                else:
+                    st.info(f"Showing all {total_requirements} requirements")
     
     with tab2:
         st.markdown("### 🧪 AI-Powered Test Case Generation")
@@ -271,42 +357,168 @@ def main():
             with col1:
                 st.metric("Total Test Cases", len(test_cases))
             with col2:
-                positive_count = sum(1 for tc in test_cases if getattr(tc, 'test_case_type', None) == 'positive')
+                positive_count = sum(1 for tc in test_cases if get_enum_value(getattr(tc, 'test_case_type', None)) == 'positive')
                 st.metric("Positive Tests", positive_count)
             with col3:
-                compliance_count = sum(1 for tc in test_cases if getattr(tc, 'test_case_type', None) == 'compliance')
+                compliance_count = sum(1 for tc in test_cases if get_enum_value(getattr(tc, 'test_case_type', None)) == 'compliance')
                 st.metric("Compliance Tests", compliance_count)
             with col4:
-                high_priority = sum(1 for tc in test_cases if getattr(tc, 'priority', None) == 'high')
+                high_priority = sum(1 for tc in test_cases if get_enum_value(getattr(tc, 'priority', None)) == 'high')
                 st.metric("High Priority", high_priority)
             
-            # Test cases table
-            tc_data = []
-            for tc in test_cases[:10]:  # Show first 10
-                tc_data.append({
-                    'ID': getattr(tc, 'id', 'N/A'),
-                    'Title': getattr(tc, 'title', 'N/A')[:50] + '...',
-                    'Type': getattr(tc, 'test_case_type', 'N/A'),
-                    'Priority': getattr(tc, 'priority', 'N/A'),
-                    'Steps': len(getattr(tc, 'test_steps', []))
-                })
+            # Filtering options
+            st.markdown("#### 🔍 Filter Test Cases")
+            col1, col2, col3 = st.columns(3)
             
-            df = pd.DataFrame(tc_data)
-            st.dataframe(df, use_container_width=True)
+            # Clear filters button
+            if st.button("🗑️ Clear All Filters"):
+                # Clear session state
+                if 'filter_type' in st.session_state:
+                    del st.session_state['filter_type']
+                if 'filter_priority' in st.session_state:
+                    del st.session_state['filter_priority']
+                if 'search_text' in st.session_state:
+                    del st.session_state['search_text']
+                st.rerun()
             
-            if len(test_cases) > 10:
-                st.info(f"Showing first 10 of {len(test_cases)} test cases")
+            with col1:
+                filter_type = st.multiselect(
+                    "Filter by Type",
+                    ['positive', 'negative', 'boundary', 'integration', 'security', 'compliance'],
+                    default=st.session_state.get('filter_type', [])
+                )
+            
+            with col2:
+                filter_priority = st.multiselect(
+                    "Filter by Priority",
+                    ['high', 'medium', 'low'],
+                    default=st.session_state.get('filter_priority', [])
+                )
+            
+            with col3:
+                search_text = st.text_input("Search in Title/Description", 
+                                          value=st.session_state.get('search_text', ''),
+                                          placeholder="Enter search term...")
+            
+            # Store current filter values in session state
+            st.session_state['filter_type'] = filter_type
+            st.session_state['filter_priority'] = filter_priority
+            st.session_state['search_text'] = search_text
+            
+            # Reset pagination if filters changed
+            if (st.session_state.get('prev_filter_type', []) != filter_type or 
+                st.session_state.get('prev_filter_priority', []) != filter_priority or 
+                st.session_state.get('prev_search_text', '') != search_text):
+                st.session_state.tc_current_page = 1
+                st.session_state['prev_filter_type'] = filter_type
+                st.session_state['prev_filter_priority'] = filter_priority
+                st.session_state['prev_search_text'] = search_text
+            
+            # Apply filters
+            filtered_test_cases = test_cases.copy()
+            
+            if filter_type:
+                filtered_test_cases = [tc for tc in filtered_test_cases 
+                                     if get_enum_value(getattr(tc, 'test_case_type', None)).lower() in filter_type]
+            
+            if filter_priority:
+                filtered_test_cases = [tc for tc in filtered_test_cases 
+                                     if get_enum_value(getattr(tc, 'priority', None)).lower() in filter_priority]
+            
+            if search_text:
+                filtered_test_cases = [tc for tc in filtered_test_cases 
+                                     if search_text.lower() in getattr(tc, 'title', '').lower() or 
+                                        search_text.lower() in getattr(tc, 'description', '').lower()]
+            
+            # Test cases table with pagination
+            if filtered_test_cases:
+                # Pagination controls
+                col1, col2, col3 = st.columns([1, 2, 1])
+                
+                with col1:
+                    tc_items_per_page = st.selectbox(
+                        "Items per page",
+                        [10, 25, 50, 100, "All"],
+                        index=0,
+                        key="tc_items_per_page"
+                    )
+                    if tc_items_per_page == "All":
+                        tc_items_per_page = total_test_cases
+                
+                with col2:
+                    total_test_cases = len(filtered_test_cases)
+                    total_tc_pages = (total_test_cases + tc_items_per_page - 1) // tc_items_per_page
+                    
+                    if 'tc_current_page' not in st.session_state:
+                        st.session_state.tc_current_page = 1
+                    
+                    if total_tc_pages > 1:
+                        current_tc_page = st.selectbox(
+                            f"Page (1-{total_tc_pages})",
+                            range(1, total_tc_pages + 1),
+                            index=st.session_state.tc_current_page - 1,
+                            key="tc_page_selector"
+                        )
+                        st.session_state.tc_current_page = current_tc_page
+                    else:
+                        st.session_state.tc_current_page = 1
+                
+                with col3:
+                    if st.button("🔄 Refresh", key="refresh_tc"):
+                        st.session_state.tc_current_page = 1
+                        st.rerun()
+                
+                # Calculate pagination
+                start_tc_idx = (st.session_state.tc_current_page - 1) * tc_items_per_page
+                end_tc_idx = min(start_tc_idx + tc_items_per_page, total_test_cases)
+                
+                # Prepare data for current page
+                tc_data = []
+                for tc in filtered_test_cases[start_tc_idx:end_tc_idx]:
+                    tc_data.append({
+                        'ID': getattr(tc, 'id', 'N/A'),
+                        'Title': getattr(tc, 'title', 'N/A')[:50] + '...',
+                        'Type': get_enum_value(getattr(tc, 'test_case_type', None)),
+                        'Priority': get_enum_value(getattr(tc, 'priority', None)),
+                        'Steps': len(getattr(tc, 'test_steps', []))
+                    })
+                
+                df = pd.DataFrame(tc_data)
+                st.dataframe(df, use_container_width=True)
+                
+                # Pagination info
+                if len(filtered_test_cases) != len(test_cases):
+                    if total_tc_pages > 1:
+                        st.info(f"Showing {start_tc_idx + 1}-{end_tc_idx} of {total_test_cases} filtered test cases (from {len(test_cases)} total) - Page {st.session_state.tc_current_page} of {total_tc_pages}")
+                    else:
+                        st.info(f"Showing all {total_test_cases} filtered test cases (from {len(test_cases)} total)")
+                elif total_tc_pages > 1:
+                    st.info(f"Showing {start_tc_idx + 1}-{end_tc_idx} of {total_test_cases} test cases - Page {st.session_state.tc_current_page} of {total_tc_pages}")
+                else:
+                    st.info(f"Showing all {total_test_cases} test cases")
+            else:
+                st.warning("No test cases match the current filters")
             
             # Show detailed test case
             if st.checkbox("🔍 Show Detailed Test Case"):
-                selected_idx = st.selectbox("Select Test Case", range(len(test_cases)))
-                if selected_idx is not None:
-                    tc = test_cases[selected_idx]
+                if filtered_test_cases:
+                    # Create options for selectbox with test case info
+                    options = [f"{getattr(tc, 'id', 'N/A')} - {getattr(tc, 'title', 'N/A')[:30]}..." 
+                              for tc in filtered_test_cases]
+                    selected_idx = st.selectbox("Select Test Case", range(len(filtered_test_cases)), 
+                                              format_func=lambda x: options[x])
+                    if selected_idx is not None:
+                        tc = filtered_test_cases[selected_idx]
+                else:
+                    st.warning("No test cases match the current filters")
+                    tc = None
+                
+                if tc is not None:
                     st.markdown(f"**Test Case: {getattr(tc, 'id', 'N/A')}**")
                     st.markdown(f"**Title:** {getattr(tc, 'title', 'N/A')}")
                     st.markdown(f"**Description:** {getattr(tc, 'description', 'N/A')}")
-                    st.markdown(f"**Type:** {getattr(tc, 'test_case_type', 'N/A')}")
-                    st.markdown(f"**Priority:** {getattr(tc, 'priority', 'N/A')}")
+                    st.markdown(f"**Type:** {get_enum_value(getattr(tc, 'test_case_type', None))}")
+                    st.markdown(f"**Priority:** {get_enum_value(getattr(tc, 'priority', None))}")
                     
                     # Test steps
                     steps = getattr(tc, 'test_steps', [])
@@ -438,6 +650,9 @@ def main():
             if st.button("📤 Export Traceability Matrix"):
                 with st.spinner("Exporting traceability matrix..."):
                     try:
+                        # Initialize traceability matrix generator
+                        matrix_generator = TraceabilityMatrixGenerator()
+                        
                         filename = f"traceability_matrix_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
                         success = matrix_generator.export_traceability_matrix(
                             matrix_data,
@@ -466,7 +681,7 @@ def main():
     st.markdown("""
     <div style='text-align: center; color: #666;'>
         <p>🏥 Healthcare AI Test Case Generator | Built with Streamlit | 
-        <a href='https://github.com/your-username/healthcare-ai-testcase-generator' target='_blank'>GitHub</a></p>
+        <a href='https://github.com/radhika-Qq/healthcare-ai-testcase-generator' target='_blank'>GitHub</a></p>
     </div>
     """, unsafe_allow_html=True)
 

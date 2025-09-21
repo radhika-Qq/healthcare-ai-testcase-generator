@@ -1,0 +1,1117 @@
+{
+  "export_info": {
+    "export_timestamp": "2025-09-21T15:23:10.646205",
+    "total_test_cases": 18,
+    "export_format": "json",
+    "version": "1.0"
+  },
+  "test_cases": [
+    {
+      "id": "TC-REQ-001-POS-001",
+      "title": "Positive Test: acquire and process ECG signals from up to 12 lead...",
+      "description": "Verify that the system correctly implements: acquire and process ECG signals from up to 12 leads",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-001",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.928748",
+      "last_modified": "2025-09-21T15:20:55.928760",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-001-NEG-001",
+      "title": "Negative Test: acquire and process ECG signals from up to 12 lead...",
+      "description": "Verify that the system handles invalid inputs gracefully: acquire and process ECG signals from up to 12 leads",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-001",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.928791",
+      "last_modified": "2025-09-21T15:20:55.928795",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-002-POS-001",
+      "title": "Positive Test: filter out common artifacts including muscle noise...",
+      "description": "Verify that the system correctly implements: filter out common artifacts including muscle noise,",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-002",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.928862",
+      "last_modified": "2025-09-21T15:20:55.928866",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-002-NEG-001",
+      "title": "Negative Test: filter out common artifacts including muscle noise...",
+      "description": "Verify that the system handles invalid inputs gracefully: filter out common artifacts including muscle noise,",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-002",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.928886",
+      "last_modified": "2025-09-21T15:20:55.928890",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-003-POS-001",
+      "title": "Positive Test: store patient demographic information, cardiac dat...",
+      "description": "Verify that the system correctly implements: store patient demographic information, cardiac data,",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-003",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.928945",
+      "last_modified": "2025-09-21T15:20:55.928949",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-003-NEG-001",
+      "title": "Negative Test: store patient demographic information, cardiac dat...",
+      "description": "Verify that the system handles invalid inputs gracefully: store patient demographic information, cardiac data,",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-003",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 15,
+      "created_date": "2025-09-21T15:20:55.928975",
+      "last_modified": "2025-09-21T15:20:55.928978",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 4,
+          "action": "Enter invalid patient ID",
+          "expected_result": "System displays patient not found error",
+          "data_inputs": {
+            "patient_id": "INVALID_ID"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 5,
+          "action": "Submit corrupted data",
+          "expected_result": "System handles data corruption gracefully",
+          "data_inputs": {
+            "data_format": "corrupted"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-004-POS-001",
+      "title": "Positive Test: maintain a complete audit trail of all user action...",
+      "description": "Verify that the system correctly implements: maintain a complete audit trail of all user actions,",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-004",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929031",
+      "last_modified": "2025-09-21T15:20:55.929034",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-004-NEG-001",
+      "title": "Negative Test: maintain a complete audit trail of all user action...",
+      "description": "Verify that the system handles invalid inputs gracefully: maintain a complete audit trail of all user actions,",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-004",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929053",
+      "last_modified": "2025-09-21T15:20:55.929056",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-005-POS-001",
+      "title": "Positive Test: process cardiac signals in real-time with minimal...",
+      "description": "Verify that the system correctly implements: process cardiac signals in real-time with minimal",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-005",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929108",
+      "last_modified": "2025-09-21T15:20:55.929112",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-005-NEG-001",
+      "title": "Negative Test: process cardiac signals in real-time with minimal...",
+      "description": "Verify that the system handles invalid inputs gracefully: process cardiac signals in real-time with minimal",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-005",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929131",
+      "last_modified": "2025-09-21T15:20:55.929134",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-006-POS-001",
+      "title": "Positive Test: comply with FDA 21 CFR 820 design control requirem...",
+      "description": "Verify that the system correctly implements: comply with FDA 21 CFR 820 design control requirements",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-006",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929187",
+      "last_modified": "2025-09-21T15:20:55.929191",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-006-NEG-001",
+      "title": "Negative Test: comply with FDA 21 CFR 820 design control requirem...",
+      "description": "Verify that the system handles invalid inputs gracefully: comply with FDA 21 CFR 820 design control requirements",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-006",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929209",
+      "last_modified": "2025-09-21T15:20:55.929212",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-007-POS-001",
+      "title": "Positive Test: comply with FDA 21 CFR 11 requirements for electro...",
+      "description": "Verify that the system correctly implements: comply with FDA 21 CFR 11 requirements for electronic",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-007",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929262",
+      "last_modified": "2025-09-21T15:20:55.929265",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-007-NEG-001",
+      "title": "Negative Test: comply with FDA 21 CFR 11 requirements for electro...",
+      "description": "Verify that the system handles invalid inputs gracefully: comply with FDA 21 CFR 11 requirements for electronic",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-007",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929284",
+      "last_modified": "2025-09-21T15:20:55.929287",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-008-POS-001",
+      "title": "Positive Test: comply with ISO 13485 quality management system...",
+      "description": "Verify that the system correctly implements: comply with ISO 13485 quality management system",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-008",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929334",
+      "last_modified": "2025-09-21T15:20:55.929337",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-008-NEG-001",
+      "title": "Negative Test: comply with ISO 13485 quality management system...",
+      "description": "Verify that the system handles invalid inputs gracefully: comply with ISO 13485 quality management system",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-008",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929355",
+      "last_modified": "2025-09-21T15:20:55.929359",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-009-POS-001",
+      "title": "Positive Test: comply with IEC 62304 medical device software...",
+      "description": "Verify that the system correctly implements: comply with IEC 62304 medical device software",
+      "test_case_type": "positive",
+      "priority": "medium",
+      "requirement_id": "REQ-009",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "All test steps pass successfully",
+      "pass_criteria": [
+        "System responds as expected",
+        "No errors or exceptions occur"
+      ],
+      "fail_criteria": [
+        "System fails to respond",
+        "Errors or exceptions occur"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929410",
+      "last_modified": "2025-09-21T15:20:55.929445",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Access the system",
+          "expected_result": "System access the system successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Perform the required operation",
+          "expected_result": "System perform the required operation successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Verify the result",
+          "expected_result": "System verify the result successfully",
+          "data_inputs": {
+            "input_data": "test_input",
+            "expected_format": "valid"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    },
+    {
+      "id": "TC-REQ-009-NEG-001",
+      "title": "Negative Test: comply with IEC 62304 medical device software...",
+      "description": "Verify that the system handles invalid inputs gracefully: comply with IEC 62304 medical device software",
+      "test_case_type": "negative",
+      "priority": "medium",
+      "requirement_id": "REQ-009",
+      "compliance_refs": [],
+      "prerequisites": [
+        "System is installed and configured",
+        "Test environment is available",
+        "Test data is prepared",
+        "Compliance settings are configured",
+        "Audit logging is enabled"
+      ],
+      "expected_outcome": "System handles invalid inputs gracefully with appropriate error messages",
+      "pass_criteria": [
+        "System displays appropriate error messages",
+        "System remains stable"
+      ],
+      "fail_criteria": [
+        "System crashes or behaves unexpectedly",
+        "No error handling"
+      ],
+      "estimated_duration": 11,
+      "created_date": "2025-09-21T15:20:55.929515",
+      "last_modified": "2025-09-21T15:20:55.929523",
+      "test_steps": [
+        {
+          "step_number": 1,
+          "action": "Enter invalid input data",
+          "expected_result": "System displays appropriate error message",
+          "data_inputs": {
+            "input_data": "invalid_data"
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 2,
+          "action": "Submit empty form",
+          "expected_result": "System displays validation error",
+          "data_inputs": {
+            "input_data": ""
+          },
+          "preconditions": null,
+          "postconditions": null
+        },
+        {
+          "step_number": 3,
+          "action": "Access without proper permissions",
+          "expected_result": "System denies access with appropriate message",
+          "data_inputs": {
+            "permissions": "none"
+          },
+          "preconditions": null,
+          "postconditions": null
+        }
+      ]
+    }
+  ]
+}
