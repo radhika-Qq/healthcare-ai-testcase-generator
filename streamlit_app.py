@@ -224,19 +224,40 @@ def main():
         """)
         
         st.markdown("### 🔧 Configuration")
-        with st.form("api_key_form"):
-            api_key = st.text_input("Google AI API Key", type="password", help="Enter your Google AI API key")
-            submitted = st.form_submit_button("Save API Key")
         
-        if submitted and api_key:
-            st.session_state.api_key = api_key
-            st.success("✅ API Key configured")
-        elif submitted and not api_key:
-            st.warning("⚠️ Please enter an API key")
-        elif 'api_key' in st.session_state and st.session_state.api_key:
-            st.success("✅ API Key configured")
+        # Check if API key is available from config
+        config_api_key = Config.GOOGLE_AI_API_KEY
+        
+        if config_api_key:
+            # API key is available from config
+            st.success("✅ API Key loaded from configuration (.env file)")
+            st.info(f"🔑 Using API key: {config_api_key[:10]}...{config_api_key[-4:]}")
+            st.session_state.api_key = config_api_key
+            
+            # Show environment info
+            st.markdown("---")
+            st.markdown("**Environment Configuration:**")
+            st.markdown(f"• Environment: `{Config.ENVIRONMENT}`")
+            st.markdown(f"• Log Level: `{Config.LOG_LEVEL}`")
+            st.markdown(f"• Export Format: `{Config.DEFAULT_EXPORT_FORMAT}`")
         else:
-            st.warning("⚠️ API key required for full functionality")
+            # API key not found in config, show input form
+            st.warning("⚠️ No API key found in environment variables")
+            st.info("💡 **Tip:** Create a `.env` file with `GOOGLE_AI_API_KEY=your_key_here` to avoid manual entry")
+            
+            with st.form("api_key_form"):
+                api_key = st.text_input("Google AI API Key", type="password", help="Enter your Google AI API key")
+                submitted = st.form_submit_button("Save API Key")
+            
+            if submitted and api_key:
+                st.session_state.api_key = api_key
+                st.success("✅ API Key configured")
+            elif submitted and not api_key:
+                st.warning("⚠️ Please enter an API key")
+            elif 'api_key' in st.session_state and st.session_state.api_key:
+                st.success("✅ API Key configured")
+            else:
+                st.warning("⚠️ API key required for full functionality")
     
     # Main content tabs
     tab1, tab2, tab3 = st.tabs(["📄 Document Parser", "🧪 Test Generator", "📊 Export & Traceability"])
