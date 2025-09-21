@@ -74,20 +74,8 @@ def parse_healthcare_document(file_path: Union[str, Path],
         }
         
     except Exception as e:
-        error_msg = str(e)
-        logger.error(f"Error parsing healthcare document: {error_msg}")
-        
-        # Provide more specific error messages
-        if "zip file" in error_msg.lower():
-            raise ValueError("Document parsing failed: The file appears to be corrupted or in an unsupported format. Please try with a different file or ensure the file is not corrupted.")
-        elif "not a zip file" in error_msg.lower():
-            raise ValueError("Document parsing failed: The file format is not supported. Please ensure you're uploading a valid PDF, Word document, or text file.")
-        elif "file not found" in error_msg.lower():
-            raise FileNotFoundError(f"Document not found: {file_path}")
-        elif "unsupported file format" in error_msg.lower():
-            raise ValueError(f"Unsupported file format. Please use one of: {', '.join(['.pdf', '.docx', '.doc', '.xml', '.html', '.txt'])}")
-        else:
-            raise ValueError(f"Document parsing failed: {error_msg}. Please try with a different file or check the file format.")
+        logger.error(f"Error parsing healthcare document: {str(e)}")
+        raise
 
 
 def clean_text(text: str) -> str:
