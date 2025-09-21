@@ -99,117 +99,40 @@ class DocumentParser:
         
     def _parse_word(self, file_path: Path) -> Dict[str, Any]:
         """Parse Word documents."""
-        try:
-            # Validate file before parsing
-            if not self._is_valid_docx_file(file_path):
-                raise ValueError("Invalid or corrupted Word document. The file may not be a valid .docx file.")
-            
-            doc = Document(file_path)
-            content = []
-            
-            # Extract paragraphs with hierarchy
-            for i, paragraph in enumerate(doc.paragraphs):
-                if paragraph.text.strip():
-                    style = paragraph.style.name if paragraph.style else 'Normal'
-                    content.append({
-                        'index': i,
-                        'text': paragraph.text,
-                        'style': style,
-                        'type': 'paragraph'
-                    })
-                    
-            # Extract tables
-            for table_idx, table in enumerate(doc.tables):
-                table_data = []
-                for row in table.rows:
-                    row_data = [cell.text for cell in row.cells]
-                    table_data.append(row_data)
-                    
-                content.append({
-                    'index': table_idx,
-                    'data': table_data,
-                    'type': 'table'
-                })
-                
-            return {
-                'file_path': str(file_path),
-                'file_type': 'word',
-                'content': content,
-                'total_paragraphs': len([c for c in content if c['type'] == 'paragraph']),
-                'total_tables': len([c for c in content if c['type'] == 'table'])
-            }
-            
-        except Exception as e:
-            error_msg = str(e)
-            logger.warning(f"Word document parsing failed: {error_msg}")
-            
-            # Try to parse as plain text as fallback
-            try:
-                logger.info("Attempting to parse as plain text as fallback...")
-                return self._parse_as_text_fallback(file_path)
-            except Exception as fallback_error:
-                logger.error(f"Fallback text parsing also failed: {fallback_error}")
-                
-                # Provide specific error messages
-                if "zip file" in error_msg.lower() or "not a zip file" in error_msg.lower():
-                    raise ValueError("The uploaded file is not a valid Word document. Please ensure it's a proper .docx file and not corrupted.")
-                elif "bad zipfile" in error_msg.lower():
-                    raise ValueError("The Word document appears to be corrupted. Please try re-saving the file or use a different document.")
-                else:
-                    raise ValueError(f"Failed to parse Word document: {error_msg}")
-    
-    def _parse_as_text_fallback(self, file_path: Path) -> Dict[str, Any]:
-        """Fallback method to parse file as plain text."""
-        try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as file:
-                content_text = file.read()
-        except UnicodeDecodeError:
-            # Try with different encoding
-            with open(file_path, 'r', encoding='latin-1', errors='ignore') as file:
-                content_text = file.read()
-        
-        # Split into lines and create content structure
-        lines = content_text.split('\n')
+        doc = Document(file_path)
         content = []
         
-        for i, line in enumerate(lines):
-            if line.strip():
+        # Extract paragraphs with hierarchy
+        for i, paragraph in enumerate(doc.paragraphs):
+            if paragraph.text.strip():
+                style = paragraph.style.name if paragraph.style else 'Normal'
                 content.append({
                     'index': i,
-                    'text': line.strip(),
-                    'style': 'Normal',
+                    'text': paragraph.text,
+                    'style': style,
                     'type': 'paragraph'
                 })
-        
+                
+        # Extract tables
+        for table_idx, table in enumerate(doc.tables):
+            table_data = []
+            for row in table.rows:
+                row_data = [cell.text for cell in row.cells]
+                table_data.append(row_data)
+                
+            content.append({
+                'index': table_idx,
+                'data': table_data,
+                'type': 'table'
+            })
+            
         return {
             'file_path': str(file_path),
-            'file_type': 'text_fallback',
+            'file_type': 'word',
             'content': content,
-            'total_paragraphs': len(content),
-            'total_tables': 0,
-            'fallback_used': True
+            'total_paragraphs': len([c for c in content if c['type'] == 'paragraph']),
+            'total_tables': len([c for c in content if c['type'] == 'table'])
         }
-    
-    def _is_valid_docx_file(self, file_path: Path) -> bool:
-        """Validate if the file is a proper .docx file."""
-        try:
-            # Check file size
-            if file_path.stat().st_size == 0:
-                return False
-            
-            # Check if it's actually a zip file (docx files are zip archives)
-            import zipfile
-            try:
-                with zipfile.ZipFile(file_path, 'r') as zip_file:
-                    # Check for required Word document structure
-                    required_files = ['[Content_Types].xml', 'word/document.xml']
-                    file_list = zip_file.namelist()
-                    return all(req_file in file_list for req_file in required_files)
-            except zipfile.BadZipFile:
-                return False
-                
-        except Exception:
-            return False
         
     def _parse_xml(self, file_path: Path) -> Dict[str, Any]:
         """Parse XML documents."""

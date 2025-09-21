@@ -78,11 +78,7 @@ def parse_healthcare_document(file_path: Union[str, Path],
         logger.error(f"Error parsing healthcare document: {error_msg}")
         
         # Provide more specific error messages
-        if "not a valid word document" in error_msg.lower():
-            raise ValueError("The uploaded file is not a valid Word document. Please ensure it's a proper .docx file and not corrupted.")
-        elif "word document appears to be corrupted" in error_msg.lower():
-            raise ValueError("The Word document appears to be corrupted. Please try re-saving the file or use a different document.")
-        elif "zip file" in error_msg.lower():
+        if "zip file" in error_msg.lower():
             raise ValueError("Document parsing failed: The file appears to be corrupted or in an unsupported format. Please try with a different file or ensure the file is not corrupted.")
         elif "not a zip file" in error_msg.lower():
             raise ValueError("Document parsing failed: The file format is not supported. Please ensure you're uploading a valid PDF, Word document, or text file.")
