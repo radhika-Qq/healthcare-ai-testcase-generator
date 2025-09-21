@@ -1,0 +1,15 @@
+{
+  "workflow_completed": true,
+  "duration_seconds": 0.23154568672180176,
+  "document_parsed": true,
+  "requirements_found": 40,
+  "test_cases_generated": 80,
+  "compliance_validated": 80,
+  "export_results": {
+    "json": true,
+    "excel": true,
+    "traceability_matrix": true
+  },
+  "output_directory": "C:\\Users\\radhi\\Desktop\\healthcare-ai-testcase-generator\\demo_results_medical",
+  "timestamp": "2025-09-20 12:50:57"
+}

@@ -11,7 +11,7 @@ import sys
 import json
 import logging
 from pathlib import Path
-from typing import Optional, List
+from typing import Optional, List, Any
 import time
 
 # Add project root to path
@@ -142,7 +142,7 @@ class HealthcareAICLI:
             logger.error(f"❌ Error generating test cases: {e}")
             raise
     
-    def validate_compliance(self, test_cases: List[dict]) -> List[dict]:
+    def validate_compliance(self, test_cases: List[Any]) -> List[dict]:
         """Validate test cases for compliance."""
         logger.info("Validating compliance...")
         
@@ -150,40 +150,8 @@ class HealthcareAICLI:
             validator = ComplianceValidator()
             validation_reports = []
             
-            for tc_data in test_cases:
-                # Convert dict back to TestCase object for validation
-                from test_case_generation.test_case_generator import TestCase, TestStep, TestCaseType, TestCasePriority
-                
-                test_steps = [
-                    TestStep(
-                        step_number=step['step_number'],
-                        action=step['action'],
-                        expected_result=step['expected_result'],
-                        data_inputs=step.get('data_inputs'),
-                        preconditions=step.get('preconditions'),
-                        postconditions=step.get('postconditions')
-                    )
-                    for step in tc_data['test_steps']
-                ]
-                
-                tc = TestCase(
-                    id=tc_data['id'],
-                    title=tc_data['title'],
-                    description=tc_data['description'],
-                    test_case_type=TestCaseType(tc_data['test_case_type']),
-                    priority=TestCasePriority(tc_data['priority']),
-                    requirement_id=tc_data['requirement_id'],
-                    compliance_refs=tc_data['compliance_refs'],
-                    test_steps=test_steps,
-                    prerequisites=tc_data['prerequisites'],
-                    expected_outcome=tc_data['expected_outcome'],
-                    pass_criteria=tc_data['pass_criteria'],
-                    fail_criteria=tc_data['fail_criteria'],
-                    estimated_duration=tc_data.get('estimated_duration'),
-                    created_date=tc_data.get('created_date', ''),
-                    last_modified=tc_data.get('last_modified', '')
-                )
-                
+            for tc in test_cases:
+                # tc is already a TestCase object from generate_test_cases
                 report = validator.validate_test_case(tc, tc.compliance_refs)
                 validation_reports.append({
                     'test_case_id': report.test_case_id,
@@ -211,7 +179,7 @@ class HealthcareAICLI:
             logger.error(f"❌ Error validating compliance: {e}")
             raise
     
-    def export_results(self, test_cases: List[dict], 
+    def export_results(self, test_cases: List[Any], 
                       format_type: str, 
                       output_path: str,
                       **kwargs) -> bool:
@@ -221,44 +189,9 @@ class HealthcareAICLI:
         try:
             export_manager = ExportManager()
             
-            # Convert dict format back to TestCase objects
-            from test_case_generation.test_case_generator import TestCase, TestStep, TestCaseType, TestCasePriority
-            
-            tc_objects = []
-            for tc_data in test_cases:
-                test_steps = [
-                    TestStep(
-                        step_number=step['step_number'],
-                        action=step['action'],
-                        expected_result=step['expected_result'],
-                        data_inputs=step.get('data_inputs'),
-                        preconditions=step.get('preconditions'),
-                        postconditions=step.get('postconditions')
-                    )
-                    for step in tc_data['test_steps']
-                ]
-                
-                tc = TestCase(
-                    id=tc_data['id'],
-                    title=tc_data['title'],
-                    description=tc_data['description'],
-                    test_case_type=TestCaseType(tc_data['test_case_type']),
-                    priority=TestCasePriority(tc_data['priority']),
-                    requirement_id=tc_data['requirement_id'],
-                    compliance_refs=tc_data['compliance_refs'],
-                    test_steps=test_steps,
-                    prerequisites=tc_data['prerequisites'],
-                    expected_outcome=tc_data['expected_outcome'],
-                    pass_criteria=tc_data['pass_criteria'],
-                    fail_criteria=tc_data['fail_criteria'],
-                    estimated_duration=tc_data.get('estimated_duration'),
-                    created_date=tc_data.get('created_date', ''),
-                    last_modified=tc_data.get('last_modified', '')
-                )
-                tc_objects.append(tc)
-            
+            # test_cases are already TestCase objects from generate_test_cases
             success = export_manager.export_test_cases(
-                tc_objects, 
+                test_cases, 
                 output_path, 
                 format_type, 
                 **kwargs
@@ -276,7 +209,7 @@ class HealthcareAICLI:
             raise
     
     def generate_traceability_matrix(self, requirements: List[dict], 
-                                   test_cases: List[dict],
+                                   test_cases: List[Any],
                                    compliance_mappings: List[dict] = None,
                                    output_path: Optional[str] = None) -> dict:
         """Generate traceability matrix."""

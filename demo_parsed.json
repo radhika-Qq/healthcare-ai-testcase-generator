@@ -1,0 +1,1241 @@
+{
+  "document_info": {
+    "file_path": "sample_demo_data/pharmacy_management_requirements.txt",
+    "file_type": "txt",
+    "total_pages": 0,
+    "parsing_timestamp": ""
+  },
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "description": "maintain comprehensive medication databases with drug interaction checking",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "1. MEDICATION MANAGEMENT",
+      "compliance_refs": [],
+      "context": "1. MEDICATION MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall maintain comprehensive medication databases with drug interaction checking"
+    },
+    {
+      "id": "REQ-002",
+      "description": "support prescription processing with electronic prescribing (e-prescribing) capabilities",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "1. MEDICATION MANAGEMENT",
+      "compliance_refs": [],
+      "context": "1. MEDICATION MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall support prescription processing with electronic prescribing (e-prescribing) capabilities"
+    },
+    {
+      "id": "REQ-003",
+      "description": "implement automated drug allergy checking and contraindication alerts",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "1. MEDICATION MANAGEMENT",
+      "compliance_refs": [],
+      "context": "1. MEDICATION MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall implement automated drug allergy checking and contraindication alerts"
+    },
+    {
+      "id": "REQ-004",
+      "description": "support controlled substance tracking per DEA requirements",
+      "type": "usability",
+      "priority": "medium",
+      "source_section": "1. MEDICATION MANAGEMENT",
+      "compliance_refs": [],
+      "context": "1. MEDICATION MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall support controlled substance tracking per DEA requirements"
+    },
+    {
+      "id": "REQ-005",
+      "description": "track medication inventory levels with automated reorder points",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "2. INVENTORY CONTROL",
+      "compliance_refs": [],
+      "context": "2. INVENTORY CONTROL",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall track medication inventory levels with automated reorder points"
+    },
+    {
+      "id": "REQ-006",
+      "description": "support lot number tracking for medication recalls and expiration dates",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "2. INVENTORY CONTROL",
+      "compliance_refs": [],
+      "context": "2. INVENTORY CONTROL",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall support lot number tracking for medication recalls and expiration dates"
+    },
+    {
+      "id": "REQ-007",
+      "description": "implement barcode scanning for medication verification",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "2. INVENTORY CONTROL",
+      "compliance_refs": [],
+      "context": "2. INVENTORY CONTROL",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall implement barcode scanning for medication verification"
+    },
+    {
+      "id": "REQ-008",
+      "description": "maintain temperature monitoring for controlled storage medications",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "2. INVENTORY CONTROL",
+      "compliance_refs": [],
+      "context": "2. INVENTORY CONTROL",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall maintain temperature monitoring for controlled storage medications"
+    },
+    {
+      "id": "REQ-009",
+      "description": "implement comprehensive medication error prevention systems",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "3. PATIENT SAFETY",
+      "compliance_refs": [],
+      "context": "3. PATIENT SAFETY",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall implement comprehensive medication error prevention systems"
+    },
+    {
+      "id": "REQ-010",
+      "description": "provide clinical decision support for dosing calculations",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "3. PATIENT SAFETY",
+      "compliance_refs": [],
+      "context": "3. PATIENT SAFETY",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall provide clinical decision support for dosing calculations"
+    },
+    {
+      "id": "REQ-011",
+      "description": "support medication reconciliation processes for patient transitions",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "3. PATIENT SAFETY",
+      "compliance_refs": [],
+      "context": "3. PATIENT SAFETY",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall support medication reconciliation processes for patient transitions"
+    },
+    {
+      "id": "REQ-012",
+      "description": "implement adverse drug event (ADE) monitoring and reporting",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "3. PATIENT SAFETY",
+      "compliance_refs": [],
+      "context": "3. PATIENT SAFETY",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall implement adverse drug event (ADE) monitoring and reporting"
+    },
+    {
+      "id": "REQ-013",
+      "description": "comply with FDA 21 CFR 11 electronic records and signatures requirements",
+      "type": "compliance",
+      "priority": "high",
+      "source_section": "4. REGULATORY COMPLIANCE",
+      "compliance_refs": [],
+      "context": "4. REGULATORY COMPLIANCE",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall comply with FDA 21 CFR 11 electronic records and signatures requirements"
+    },
+    {
+      "id": "REQ-014",
+      "description": "meet HIPAA privacy and security requirements for patient data",
+      "type": "security",
+      "priority": "high",
+      "source_section": "4. REGULATORY COMPLIANCE",
+      "compliance_refs": [
+        "HIPAA"
+      ],
+      "context": "4. REGULATORY COMPLIANCE",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall meet HIPAA privacy and security requirements for patient data"
+    },
+    {
+      "id": "REQ-015",
+      "description": "support DEA controlled substance reporting and tracking",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "4. REGULATORY COMPLIANCE",
+      "compliance_refs": [],
+      "context": "4. REGULATORY COMPLIANCE",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall support DEA controlled substance reporting and tracking"
+    },
+    {
+      "id": "REQ-016",
+      "description": "implement USP 797 sterile compounding requirements",
+      "type": "usability",
+      "priority": "high",
+      "source_section": "4. REGULATORY COMPLIANCE",
+      "compliance_refs": [],
+      "context": "4. REGULATORY COMPLIANCE",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall implement USP 797 sterile compounding requirements"
+    },
+    {
+      "id": "REQ-017",
+      "description": "support electronic prescription transmission to pharmacies",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "5. PRESCRIPTION PROCESSING",
+      "compliance_refs": [],
+      "context": "5. PRESCRIPTION PROCESSING",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall support electronic prescription transmission to pharmacies"
+    },
+    {
+      "id": "REQ-018",
+      "description": "implement prescription verification and authentication procedures",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "5. PRESCRIPTION PROCESSING",
+      "compliance_refs": [],
+      "context": "5. PRESCRIPTION PROCESSING",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall implement prescription verification and authentication procedures"
+    },
+    {
+      "id": "REQ-019",
+      "description": "support prescription refill management and authorization",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "5. PRESCRIPTION PROCESSING",
+      "compliance_refs": [],
+      "context": "5. PRESCRIPTION PROCESSING",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall support prescription refill management and authorization"
+    },
+    {
+      "id": "REQ-020",
+      "description": "maintain prescription audit trails per regulatory requirements",
+      "type": "usability",
+      "priority": "medium",
+      "source_section": "5. PRESCRIPTION PROCESSING",
+      "compliance_refs": [],
+      "context": "5. PRESCRIPTION PROCESSING",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall maintain prescription audit trails per regulatory requirements"
+    },
+    {
+      "id": "REQ-021",
+      "description": "provide drug interaction checking with multiple databases",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "6. CLINICAL SUPPORT",
+      "compliance_refs": [],
+      "context": "6. CLINICAL SUPPORT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall provide drug interaction checking with multiple databases"
+    },
+    {
+      "id": "REQ-022",
+      "description": "support therapeutic duplication detection and alerts",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "6. CLINICAL SUPPORT",
+      "compliance_refs": [],
+      "context": "6. CLINICAL SUPPORT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall support therapeutic duplication detection and alerts"
+    },
+    {
+      "id": "REQ-023",
+      "description": "implement dose range checking for patient-specific parameters",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "6. CLINICAL SUPPORT",
+      "compliance_refs": [],
+      "context": "6. CLINICAL SUPPORT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall implement dose range checking for patient-specific parameters"
+    },
+    {
+      "id": "REQ-024",
+      "description": "provide medication therapy management (MTM) support tools",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "6. CLINICAL SUPPORT",
+      "compliance_refs": [],
+      "context": "6. CLINICAL SUPPORT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall provide medication therapy management (MTM) support tools"
+    },
+    {
+      "id": "REQ-025",
+      "description": "support insurance claim processing and adjudication",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "7. FINANCIAL MANAGEMENT",
+      "compliance_refs": [],
+      "context": "7. FINANCIAL MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall support insurance claim processing and adjudication"
+    },
+    {
+      "id": "REQ-026",
+      "description": "implement copay and deductible calculation and collection",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "7. FINANCIAL MANAGEMENT",
+      "compliance_refs": [],
+      "context": "7. FINANCIAL MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall implement copay and deductible calculation and collection"
+    },
+    {
+      "id": "REQ-027",
+      "description": "support manufacturer coupon and discount program integration",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "7. FINANCIAL MANAGEMENT",
+      "compliance_refs": [],
+      "context": "7. FINANCIAL MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall support manufacturer coupon and discount program integration"
+    },
+    {
+      "id": "REQ-028",
+      "description": "maintain financial reporting and reconciliation capabilities",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "7. FINANCIAL MANAGEMENT",
+      "compliance_refs": [],
+      "context": "7. FINANCIAL MANAGEMENT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall maintain financial reporting and reconciliation capabilities"
+    },
+    {
+      "id": "REQ-029",
+      "description": "generate regulatory compliance reports for DEA and FDA requirements",
+      "type": "compliance",
+      "priority": "medium",
+      "source_section": "8. REPORTING AND ANALYTICS",
+      "compliance_refs": [],
+      "context": "8. REPORTING AND ANALYTICS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall generate regulatory compliance reports for DEA and FDA requirements"
+    },
+    {
+      "id": "REQ-030",
+      "description": "provide medication utilization analytics and reporting",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "8. REPORTING AND ANALYTICS",
+      "compliance_refs": [],
+      "context": "8. REPORTING AND ANALYTICS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall provide medication utilization analytics and reporting"
+    },
+    {
+      "id": "REQ-031",
+      "description": "support quality metrics reporting for pharmacy operations",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "8. REPORTING AND ANALYTICS",
+      "compliance_refs": [],
+      "context": "8. REPORTING AND ANALYTICS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall support quality metrics reporting for pharmacy operations"
+    },
+    {
+      "id": "REQ-032",
+      "description": "implement patient safety reporting and trending analysis",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "8. REPORTING AND ANALYTICS",
+      "compliance_refs": [],
+      "context": "8. REPORTING AND ANALYTICS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall implement patient safety reporting and trending analysis"
+    },
+    {
+      "id": "REQ-033",
+      "description": "integrate with electronic health records (EHR) systems",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "9. INTEGRATION REQUIREMENTS",
+      "compliance_refs": [],
+      "context": "9. INTEGRATION REQUIREMENTS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall integrate with electronic health records (EHR) systems"
+    },
+    {
+      "id": "REQ-034",
+      "description": "support laboratory information system (LIS) integration",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "9. INTEGRATION REQUIREMENTS",
+      "compliance_refs": [],
+      "context": "9. INTEGRATION REQUIREMENTS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall support laboratory information system (LIS) integration"
+    },
+    {
+      "id": "REQ-035",
+      "description": "integrate with insurance eligibility and formulary systems",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "9. INTEGRATION REQUIREMENTS",
+      "compliance_refs": [],
+      "context": "9. INTEGRATION REQUIREMENTS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall integrate with insurance eligibility and formulary systems"
+    },
+    {
+      "id": "REQ-036",
+      "description": "support third-party pharmacy benefit manager (PBM) integration",
+      "type": "non_functional",
+      "priority": "medium",
+      "source_section": "9. INTEGRATION REQUIREMENTS",
+      "compliance_refs": [],
+      "context": "9. INTEGRATION REQUIREMENTS",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall support third-party pharmacy benefit manager (PBM) integration"
+    },
+    {
+      "id": "REQ-037",
+      "description": "implement role-based access control for pharmacy staff",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "10. SECURITY AND AUDIT",
+      "compliance_refs": [],
+      "context": "10. SECURITY AND AUDIT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "1 The system shall implement role-based access control for pharmacy staff"
+    },
+    {
+      "id": "REQ-038",
+      "description": "maintain comprehensive audit trails for all system activities",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "10. SECURITY AND AUDIT",
+      "compliance_refs": [],
+      "context": "10. SECURITY AND AUDIT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "2 The system shall maintain comprehensive audit trails for all system activities"
+    },
+    {
+      "id": "REQ-039",
+      "description": "support data encryption for sensitive patient and financial data",
+      "type": "security",
+      "priority": "high",
+      "source_section": "10. SECURITY AND AUDIT",
+      "compliance_refs": [],
+      "context": "10. SECURITY AND AUDIT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "3 The system shall support data encryption for sensitive patient and financial data"
+    },
+    {
+      "id": "REQ-040",
+      "description": "implement user authentication and session management controls",
+      "type": "non_functional",
+      "priority": "high",
+      "source_section": "10. SECURITY AND AUDIT",
+      "compliance_refs": [],
+      "context": "10. SECURITY AND AUDIT",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "raw_text": "4 The system shall implement user authentication and session management controls"
+    }
+  ],
+  "compliance_mappings": [
+    {
+      "requirement_id": "REQ-002",
+      "standard": "ComplianceStandard.FDA_21_CFR_820",
+      "clause": "820.30 (Design Controls)",
+      "description": "FDA Quality System Regulation for medical devices",
+      "traceability_level": "related",
+      "evidence_required": [
+        "Design and development plan",
+        "Design input/output documentation",
+        "Design verification and validation records",
+        "Risk management file",
+        "Design review records"
+      ]
+    },
+    {
+      "requirement_id": "REQ-013",
+      "standard": "ComplianceStandard.FDA_21_CFR_11",
+      "clause": "General requirements",
+      "description": "FDA Electronic Records and Electronic Signatures regulation",
+      "traceability_level": "indirect",
+      "evidence_required": [
+        "System validation documentation",
+        "Electronic signature procedures",
+        "Audit trail records",
+        "Access control documentation",
+        "System security measures"
+      ]
+    },
+    {
+      "requirement_id": "REQ-014",
+      "standard": "ComplianceStandard.HIPAA",
+      "clause": "164.312 (Technical safeguards)",
+      "description": "Health Insurance Portability and Accountability Act",
+      "traceability_level": "related",
+      "evidence_required": [
+        "Risk assessment documentation",
+        "Security policies and procedures",
+        "Access control documentation",
+        "Audit logs and monitoring records",
+        "Incident response procedures"
+      ]
+    },
+    {
+      "requirement_id": "REQ-020",
+      "standard": "ComplianceStandard.FDA_21_CFR_11",
+      "clause": "General requirements",
+      "description": "FDA Electronic Records and Electronic Signatures regulation",
+      "traceability_level": "indirect",
+      "evidence_required": [
+        "System validation documentation",
+        "Electronic signature procedures",
+        "Audit trail records",
+        "Access control documentation",
+        "System security measures"
+      ]
+    },
+    {
+      "requirement_id": "REQ-028",
+      "standard": "ComplianceStandard.FDA_21_CFR_820",
+      "clause": "820.30 (Design Controls)",
+      "description": "FDA Quality System Regulation for medical devices",
+      "traceability_level": "related",
+      "evidence_required": [
+        "Design and development plan",
+        "Design input/output documentation",
+        "Design verification and validation records",
+        "Risk management file",
+        "Design review records"
+      ]
+    },
+    {
+      "requirement_id": "REQ-032",
+      "standard": "ComplianceStandard.FDA_21_CFR_820",
+      "clause": "General requirements",
+      "description": "FDA Quality System Regulation for medical devices",
+      "traceability_level": "indirect",
+      "evidence_required": [
+        "Design and development plan",
+        "Design input/output documentation",
+        "Design verification and validation records",
+        "Risk management file",
+        "Design review records"
+      ]
+    },
+    {
+      "requirement_id": "REQ-032",
+      "standard": "ComplianceStandard.IEC_60601",
+      "clause": "General requirements",
+      "description": "IEC 60601 Medical electrical equipment safety standards",
+      "traceability_level": "indirect",
+      "evidence_required": [
+        "Risk management file",
+        "Essential performance documentation",
+        "Safety testing records",
+        "Usability engineering file",
+        "Clinical evaluation report"
+      ]
+    },
+    {
+      "requirement_id": "REQ-038",
+      "standard": "ComplianceStandard.FDA_21_CFR_11",
+      "clause": "General requirements",
+      "description": "FDA Electronic Records and Electronic Signatures regulation",
+      "traceability_level": "indirect",
+      "evidence_required": [
+        "System validation documentation",
+        "Electronic signature procedures",
+        "Audit trail records",
+        "Access control documentation",
+        "System security measures"
+      ]
+    }
+  ],
+  "traceability_matrix": {
+    "requirements": {
+      "REQ-001": {
+        "description": "maintain comprehensive medication databases with drug interaction checking",
+        "compliance_standards": []
+      },
+      "REQ-002": {
+        "description": "support prescription processing with electronic prescribing (e-prescribing) capabilities",
+        "compliance_standards": [
+          {
+            "standard": "FDA_21_CFR_820",
+            "clause": "820.30 (Design Controls)",
+            "traceability_level": "related",
+            "evidence_required": [
+              "Design and development plan",
+              "Design input/output documentation",
+              "Design verification and validation records",
+              "Risk management file",
+              "Design review records"
+            ]
+          }
+        ]
+      },
+      "REQ-003": {
+        "description": "implement automated drug allergy checking and contraindication alerts",
+        "compliance_standards": []
+      },
+      "REQ-004": {
+        "description": "support controlled substance tracking per DEA requirements",
+        "compliance_standards": []
+      },
+      "REQ-005": {
+        "description": "track medication inventory levels with automated reorder points",
+        "compliance_standards": []
+      },
+      "REQ-006": {
+        "description": "support lot number tracking for medication recalls and expiration dates",
+        "compliance_standards": []
+      },
+      "REQ-007": {
+        "description": "implement barcode scanning for medication verification",
+        "compliance_standards": []
+      },
+      "REQ-008": {
+        "description": "maintain temperature monitoring for controlled storage medications",
+        "compliance_standards": []
+      },
+      "REQ-009": {
+        "description": "implement comprehensive medication error prevention systems",
+        "compliance_standards": []
+      },
+      "REQ-010": {
+        "description": "provide clinical decision support for dosing calculations",
+        "compliance_standards": []
+      },
+      "REQ-011": {
+        "description": "support medication reconciliation processes for patient transitions",
+        "compliance_standards": []
+      },
+      "REQ-012": {
+        "description": "implement adverse drug event (ADE) monitoring and reporting",
+        "compliance_standards": []
+      },
+      "REQ-013": {
+        "description": "comply with FDA 21 CFR 11 electronic records and signatures requirements",
+        "compliance_standards": [
+          {
+            "standard": "FDA_21_CFR_11",
+            "clause": "General requirements",
+            "traceability_level": "indirect",
+            "evidence_required": [
+              "System validation documentation",
+              "Electronic signature procedures",
+              "Audit trail records",
+              "Access control documentation",
+              "System security measures"
+            ]
+          }
+        ]
+      },
+      "REQ-014": {
+        "description": "meet HIPAA privacy and security requirements for patient data",
+        "compliance_standards": [
+          {
+            "standard": "HIPAA",
+            "clause": "164.312 (Technical safeguards)",
+            "traceability_level": "related",
+            "evidence_required": [
+              "Risk assessment documentation",
+              "Security policies and procedures",
+              "Access control documentation",
+              "Audit logs and monitoring records",
+              "Incident response procedures"
+            ]
+          }
+        ]
+      },
+      "REQ-015": {
+        "description": "support DEA controlled substance reporting and tracking",
+        "compliance_standards": []
+      },
+      "REQ-016": {
+        "description": "implement USP 797 sterile compounding requirements",
+        "compliance_standards": []
+      },
+      "REQ-017": {
+        "description": "support electronic prescription transmission to pharmacies",
+        "compliance_standards": []
+      },
+      "REQ-018": {
+        "description": "implement prescription verification and authentication procedures",
+        "compliance_standards": []
+      },
+      "REQ-019": {
+        "description": "support prescription refill management and authorization",
+        "compliance_standards": []
+      },
+      "REQ-020": {
+        "description": "maintain prescription audit trails per regulatory requirements",
+        "compliance_standards": [
+          {
+            "standard": "FDA_21_CFR_11",
+            "clause": "General requirements",
+            "traceability_level": "indirect",
+            "evidence_required": [
+              "System validation documentation",
+              "Electronic signature procedures",
+              "Audit trail records",
+              "Access control documentation",
+              "System security measures"
+            ]
+          }
+        ]
+      },
+      "REQ-021": {
+        "description": "provide drug interaction checking with multiple databases",
+        "compliance_standards": []
+      },
+      "REQ-022": {
+        "description": "support therapeutic duplication detection and alerts",
+        "compliance_standards": []
+      },
+      "REQ-023": {
+        "description": "implement dose range checking for patient-specific parameters",
+        "compliance_standards": []
+      },
+      "REQ-024": {
+        "description": "provide medication therapy management (MTM) support tools",
+        "compliance_standards": []
+      },
+      "REQ-025": {
+        "description": "support insurance claim processing and adjudication",
+        "compliance_standards": []
+      },
+      "REQ-026": {
+        "description": "implement copay and deductible calculation and collection",
+        "compliance_standards": []
+      },
+      "REQ-027": {
+        "description": "support manufacturer coupon and discount program integration",
+        "compliance_standards": []
+      },
+      "REQ-028": {
+        "description": "maintain financial reporting and reconciliation capabilities",
+        "compliance_standards": [
+          {
+            "standard": "FDA_21_CFR_820",
+            "clause": "820.30 (Design Controls)",
+            "traceability_level": "related",
+            "evidence_required": [
+              "Design and development plan",
+              "Design input/output documentation",
+              "Design verification and validation records",
+              "Risk management file",
+              "Design review records"
+            ]
+          }
+        ]
+      },
+      "REQ-029": {
+        "description": "generate regulatory compliance reports for DEA and FDA requirements",
+        "compliance_standards": []
+      },
+      "REQ-030": {
+        "description": "provide medication utilization analytics and reporting",
+        "compliance_standards": []
+      },
+      "REQ-031": {
+        "description": "support quality metrics reporting for pharmacy operations",
+        "compliance_standards": []
+      },
+      "REQ-032": {
+        "description": "implement patient safety reporting and trending analysis",
+        "compliance_standards": [
+          {
+            "standard": "FDA_21_CFR_820",
+            "clause": "General requirements",
+            "traceability_level": "indirect",
+            "evidence_required": [
+              "Design and development plan",
+              "Design input/output documentation",
+              "Design verification and validation records",
+              "Risk management file",
+              "Design review records"
+            ]
+          },
+          {
+            "standard": "IEC_60601",
+            "clause": "General requirements",
+            "traceability_level": "indirect",
+            "evidence_required": [
+              "Risk management file",
+              "Essential performance documentation",
+              "Safety testing records",
+              "Usability engineering file",
+              "Clinical evaluation report"
+            ]
+          }
+        ]
+      },
+      "REQ-033": {
+        "description": "integrate with electronic health records (EHR) systems",
+        "compliance_standards": []
+      },
+      "REQ-034": {
+        "description": "support laboratory information system (LIS) integration",
+        "compliance_standards": []
+      },
+      "REQ-035": {
+        "description": "integrate with insurance eligibility and formulary systems",
+        "compliance_standards": []
+      },
+      "REQ-036": {
+        "description": "support third-party pharmacy benefit manager (PBM) integration",
+        "compliance_standards": []
+      },
+      "REQ-037": {
+        "description": "implement role-based access control for pharmacy staff",
+        "compliance_standards": []
+      },
+      "REQ-038": {
+        "description": "maintain comprehensive audit trails for all system activities",
+        "compliance_standards": [
+          {
+            "standard": "FDA_21_CFR_11",
+            "clause": "General requirements",
+            "traceability_level": "indirect",
+            "evidence_required": [
+              "System validation documentation",
+              "Electronic signature procedures",
+              "Audit trail records",
+              "Access control documentation",
+              "System security measures"
+            ]
+          }
+        ]
+      },
+      "REQ-039": {
+        "description": "support data encryption for sensitive patient and financial data",
+        "compliance_standards": []
+      },
+      "REQ-040": {
+        "description": "implement user authentication and session management controls",
+        "compliance_standards": []
+      }
+    },
+    "standards": {
+      "FDA_21_CFR_820": {
+        "description": "FDA Quality System Regulation for medical devices",
+        "requirements": [
+          {
+            "requirement_id": "REQ-002",
+            "clause": "820.30 (Design Controls)",
+            "traceability_level": "related"
+          },
+          {
+            "requirement_id": "REQ-028",
+            "clause": "820.30 (Design Controls)",
+            "traceability_level": "related"
+          },
+          {
+            "requirement_id": "REQ-032",
+            "clause": "General requirements",
+            "traceability_level": "indirect"
+          }
+        ]
+      },
+      "FDA_21_CFR_11": {
+        "description": "FDA Electronic Records and Electronic Signatures regulation",
+        "requirements": [
+          {
+            "requirement_id": "REQ-013",
+            "clause": "General requirements",
+            "traceability_level": "indirect"
+          },
+          {
+            "requirement_id": "REQ-020",
+            "clause": "General requirements",
+            "traceability_level": "indirect"
+          },
+          {
+            "requirement_id": "REQ-038",
+            "clause": "General requirements",
+            "traceability_level": "indirect"
+          }
+        ]
+      },
+      "HIPAA": {
+        "description": "Health Insurance Portability and Accountability Act",
+        "requirements": [
+          {
+            "requirement_id": "REQ-014",
+            "clause": "164.312 (Technical safeguards)",
+            "traceability_level": "related"
+          }
+        ]
+      },
+      "IEC_60601": {
+        "description": "IEC 60601 Medical electrical equipment safety standards",
+        "requirements": [
+          {
+            "requirement_id": "REQ-032",
+            "clause": "General requirements",
+            "traceability_level": "indirect"
+          }
+        ]
+      }
+    },
+    "traceability_summary": {
+      "total_requirements": 40,
+      "total_standards": 4,
+      "mapped_requirements": 7,
+      "coverage_percentage": 17.5
+    }
+  },
+  "summary": {
+    "total_requirements": 40,
+    "by_type": {
+      "non_functional": 33,
+      "usability": 3,
+      "compliance": 2,
+      "security": 2
+    },
+    "by_priority": {
+      "medium": 28,
+      "high": 12
+    },
+    "compliance_refs": [
+      "HIPAA"
+    ],
+    "requirements": [
+      {
+        "id": "REQ-001",
+        "description": "maintain comprehensive medication databases with drug interaction checking",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-002",
+        "description": "support prescription processing with electronic prescribing (e-prescribing) capabilities",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-003",
+        "description": "implement automated drug allergy checking and contraindication alerts",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-004",
+        "description": "support controlled substance tracking per DEA requirements",
+        "type": "usability",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-005",
+        "description": "track medication inventory levels with automated reorder points",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-006",
+        "description": "support lot number tracking for medication recalls and expiration dates",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-007",
+        "description": "implement barcode scanning for medication verification",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-008",
+        "description": "maintain temperature monitoring for controlled storage medications",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-009",
+        "description": "implement comprehensive medication error prevention systems",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-010",
+        "description": "provide clinical decision support for dosing calculations",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-011",
+        "description": "support medication reconciliation processes for patient transitions",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-012",
+        "description": "implement adverse drug event (ADE) monitoring and reporting",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-013",
+        "description": "comply with FDA 21 CFR 11 electronic records and signatures requirements",
+        "type": "compliance",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-014",
+        "description": "meet HIPAA privacy and security requirements for patient data",
+        "type": "security",
+        "priority": "high",
+        "compliance_refs": [
+          "HIPAA"
+        ]
+      },
+      {
+        "id": "REQ-015",
+        "description": "support DEA controlled substance reporting and tracking",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-016",
+        "description": "implement USP 797 sterile compounding requirements",
+        "type": "usability",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-017",
+        "description": "support electronic prescription transmission to pharmacies",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-018",
+        "description": "implement prescription verification and authentication procedures",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-019",
+        "description": "support prescription refill management and authorization",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-020",
+        "description": "maintain prescription audit trails per regulatory requirements",
+        "type": "usability",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-021",
+        "description": "provide drug interaction checking with multiple databases",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-022",
+        "description": "support therapeutic duplication detection and alerts",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-023",
+        "description": "implement dose range checking for patient-specific parameters",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-024",
+        "description": "provide medication therapy management (MTM) support tools",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-025",
+        "description": "support insurance claim processing and adjudication",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-026",
+        "description": "implement copay and deductible calculation and collection",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-027",
+        "description": "support manufacturer coupon and discount program integration",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-028",
+        "description": "maintain financial reporting and reconciliation capabilities",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-029",
+        "description": "generate regulatory compliance reports for DEA and FDA requirements",
+        "type": "compliance",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-030",
+        "description": "provide medication utilization analytics and reporting",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-031",
+        "description": "support quality metrics reporting for pharmacy operations",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-032",
+        "description": "implement patient safety reporting and trending analysis",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-033",
+        "description": "integrate with electronic health records (EHR) systems",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-034",
+        "description": "support laboratory information system (LIS) integration",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-035",
+        "description": "integrate with insurance eligibility and formulary systems",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-036",
+        "description": "support third-party pharmacy benefit manager (PBM) integration",
+        "type": "non_functional",
+        "priority": "medium",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-037",
+        "description": "implement role-based access control for pharmacy staff",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-038",
+        "description": "maintain comprehensive audit trails for all system activities",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-039",
+        "description": "support data encryption for sensitive patient and financial data",
+        "type": "security",
+        "priority": "high",
+        "compliance_refs": []
+      },
+      {
+        "id": "REQ-040",
+        "description": "implement user authentication and session management controls",
+        "type": "non_functional",
+        "priority": "high",
+        "compliance_refs": []
+      }
+    ]
+  }
+}
