@@ -37,6 +37,10 @@ except ImportError as e:
     st.info("Please ensure all dependencies are installed: pip install -r requirements.txt")
     st.stop()
 
+# Debug: Check if environment variables are loaded
+print(f"Debug - GOOGLE_AI_API_KEY from os.getenv: {os.getenv('GOOGLE_AI_API_KEY', 'NOT_FOUND')[:10]}...")
+print(f"Debug - GOOGLE_AI_API_KEY from Config: {Config.GOOGLE_AI_API_KEY[:10] if Config.GOOGLE_AI_API_KEY else 'NOT_FOUND'}...")
+
 # Page configuration
 st.set_page_config(
     page_title="Healthcare AI Test Case Generator",
@@ -241,8 +245,11 @@ def main():
         
         # Debug: Show environment loading status
         st.markdown("**Debug Info:**")
-        st.markdown(f"• Environment loaded: `{os.getenv('GOOGLE_AI_API_KEY', 'NOT_FOUND')[:10]}...`")
+        env_key = os.getenv('GOOGLE_AI_API_KEY', 'NOT_FOUND')
+        st.markdown(f"• Environment loaded: `{env_key[:10] if env_key != 'NOT_FOUND' else 'NOT_FOUND'}...`")
         st.markdown(f"• Config value: `{config_api_key[:10] if config_api_key else 'NOT_FOUND'}...`")
+        st.markdown(f"• Working directory: `{os.getcwd()}`")
+        st.markdown(f"• .env file exists: `{Path('.env').exists()}`")
         
         if config_api_key:
             # API key is available from config
@@ -261,7 +268,7 @@ def main():
             st.warning("⚠️ No API key found in environment variables")
             st.info("💡 **Tip:** Create a `.env` file with `GOOGLE_AI_API_KEY=your_key_here` to avoid manual entry")
             
-            with st.form("api_key_form"):
+            with st.form("api_key_form", clear_on_submit=False):
                 api_key = st.text_input("Google AI API Key", type="password", help="Enter your Google AI API key")
                 submitted = st.form_submit_button("Save API Key")
             
