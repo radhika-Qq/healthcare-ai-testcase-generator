@@ -34,11 +34,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Disable Streamlit's automatic rerun and polling
-st.set_option('deprecation.showPyplotGlobalUse', False)
-st.set_option('deprecation.showfileUploaderEncoding', False)
-
-# Custom CSS and JavaScript
+# Custom CSS
 st.markdown("""
 <style>
     .main-header {
@@ -68,72 +64,7 @@ st.markdown("""
         border-radius: 0.5rem;
         border: 1px solid #bee5eb;
     }
-    .processing-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 </style>
-
-<script>
-// Prevent multiple button clicks
-let isProcessing = false;
-
-function preventMultipleClicks() {
-    if (isProcessing) {
-        return false;
-    }
-    isProcessing = true;
-    
-    // Re-enable after 5 seconds as fallback
-    setTimeout(() => {
-        isProcessing = false;
-    }, 5000);
-    
-    return true;
-}
-
-// Add click prevention to all buttons
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            if (!preventMultipleClicks()) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-        });
-    });
-});
-
-// Monitor for status calls and block them
-let statusCallCount = 0;
-const originalFetch = window.fetch;
-window.fetch = function(...args) {
-    const url = args[0];
-    if (typeof url === 'string' && url.includes('status')) {
-        statusCallCount++;
-        if (statusCallCount > 1) {
-            console.log('Blocked duplicate status call:', url);
-            return Promise.resolve(new Response('{"status": "blocked"}', {status: 200}));
-        }
-    }
-    return originalFetch.apply(this, args);
-};
-
-// Reset status call count every 10 seconds
-setInterval(() => {
-    statusCallCount = 0;
-}, 10000);
-</script>
 """, unsafe_allow_html=True)
 
 def get_enum_value(obj):
@@ -163,50 +94,10 @@ def is_duplicate_request(request_type: str, request_id: str) -> bool:
     last_request = st.session_state.get(f'last_{request_type}_request', '')
     return last_request == request_id
 
-def is_any_request_in_progress() -> bool:
-    """Check if any request is currently in progress."""
-    request_types = ['parse_document', 'sample_document', 'generate_test_cases', 'export_data']
-    return any(st.session_state.get(f'{req_type}_in_progress', False) for req_type in request_types)
-
-def block_all_requests():
-    """Block all requests when any request is in progress."""
-    return is_any_request_in_progress()
-
-def increment_request_counter():
-    """Increment the global request counter."""
-    if 'request_counter' not in st.session_state:
-        st.session_state.request_counter = 0
-    st.session_state.request_counter += 1
-
-def reset_request_locks():
-    """Reset all request locks (for debugging)."""
-    request_types = ['parse_document', 'sample_document', 'generate_test_cases', 'export_data']
-    for req_type in request_types:
-        st.session_state[f'{req_type}_in_progress'] = False
-
 def main():
-    # Initialize request counter
-    if 'request_counter' not in st.session_state:
-        st.session_state.request_counter = 0
-    
     # Header
     st.markdown('<h1 class="main-header">🏥 Healthcare AI Test Case Generator</h1>', unsafe_allow_html=True)
     st.markdown("### AI-Powered Test Case Generation for Healthcare Software Compliance")
-    
-    # Global status indicator
-    if is_any_request_in_progress():
-        st.warning("🔄 **Operation in progress...** Please wait for the current operation to complete before starting a new one.")
-        st.markdown("---")
-    
-    # Request counter and debug panel
-    if st.session_state.request_counter > 0:
-        col1, col2 = st.columns([3, 1])
-        with col1:
-            st.info(f"📊 Total API requests made this session: {st.session_state.request_counter}")
-        with col2:
-            if st.button("🔄 Reset Locks", help="Reset all request locks (for debugging)"):
-                reset_request_locks()
-                st.rerun()
     
     # Sidebar
     with st.sidebar:
@@ -269,15 +160,15 @@ def main():
                 st.success(f"✅ File uploaded: {uploaded_file.name}")
                 
                 # Parse button
-                if st.button("🔍 Parse Document", type="primary", key="parse_uploaded", disabled=block_all_requests()):
+                if st.button("🔍 Parse Document", type="primary", key="parse_uploaded"):
                     # Generate unique request ID
                     request_id = get_request_id("parse_document", uploaded_file.name, uploaded_file.size)
                     
                     # Check for duplicate requests
                     if is_duplicate_request("parse_document", request_id):
                         st.warning("⚠️ This document is already being processed. Please wait...")
-                    elif is_any_request_in_progress():
-                        st.warning("⚠️ Another operation is in progress. Please wait...")
+                    elif is_request_in_progress("parse_document"):
+                        st.warning("⚠️ Another document is being processed. Please wait...")
                     else:
                         # Set request status and ID
                         set_request_status("parse_document", True)
@@ -285,9 +176,6 @@ def main():
                         
                         with st.spinner("Parsing document and extracting requirements..."):
                             try:
-                                # Increment request counter
-                                increment_request_counter()
-                                
                                 # Parse the document
                                 result = parse_healthcare_document(temp_path, st.session_state.get('api_key'))
                                 
@@ -329,15 +217,15 @@ def main():
             - Pharmacy Management
             """)
             
-            if st.button("📥 Use Sample Document", key="use_sample", disabled=block_all_requests()):
+            if st.button("📥 Use Sample Document", key="use_sample"):
                 # Generate unique request ID for sample document
                 request_id = get_request_id("sample_document", "medical_device_requirements.txt")
                 
                 # Check for duplicate requests
                 if is_duplicate_request("sample_document", request_id):
                     st.warning("⚠️ Sample document is already being processed. Please wait...")
-                elif is_any_request_in_progress():
-                    st.warning("⚠️ Another operation is in progress. Please wait...")
+                elif is_request_in_progress("sample_document") or is_request_in_progress("parse_document"):
+                    st.warning("⚠️ Another document is being processed. Please wait...")
                 else:
                     # Set request status and ID
                     set_request_status("sample_document", True)
@@ -347,9 +235,6 @@ def main():
                     if Path(sample_path).exists():
                         with st.spinner("Loading sample document..."):
                             try:
-                                # Increment request counter
-                                increment_request_counter()
-                                
                                 result = parse_healthcare_document(sample_path, st.session_state.get('api_key'))
                                 st.session_state.parsed_data = result
                                 st.session_state.requirements = result.get('requirements', [])
@@ -421,9 +306,9 @@ def main():
                         st.session_state.req_current_page = 1
                 
                 with col3:
-                    # Remove refresh button to prevent multiple API calls
-                    st.markdown("**Page Controls**")
-                    st.markdown("Use page selector to navigate")
+                    if st.button("🔄 Refresh", key="refresh_req"):
+                        st.session_state.req_current_page = 1
+                        st.rerun()
                 
                 # Calculate pagination
                 start_idx = (st.session_state.req_current_page - 1) * items_per_page
@@ -476,7 +361,7 @@ def main():
                     default=['positive', 'negative', 'compliance']
                 )
                 
-                if st.button("🚀 Generate Test Cases", type="primary", disabled=block_all_requests()):
+                if st.button("🚀 Generate Test Cases", type="primary"):
                     # Generate unique request ID for test case generation
                     req_count = len(st.session_state.requirements) if st.session_state.requirements else 0
                     request_id = get_request_id("generate_test_cases", req_count, str(test_types))
@@ -484,8 +369,8 @@ def main():
                     # Check for duplicate requests
                     if is_duplicate_request("generate_test_cases", request_id):
                         st.warning("⚠️ Test cases are already being generated for these requirements. Please wait...")
-                    elif is_any_request_in_progress():
-                        st.warning("⚠️ Another operation is in progress. Please wait...")
+                    elif is_request_in_progress("generate_test_cases"):
+                        st.warning("⚠️ Test case generation is already in progress. Please wait...")
                     else:
                         # Set request status and ID
                         set_request_status("generate_test_cases", True)
@@ -493,9 +378,6 @@ def main():
                         
                         with st.spinner("Generating test cases with AI..."):
                             try:
-                                # Increment request counter
-                                increment_request_counter()
-                                
                                 # Initialize test case generator
                                 generator = TestCaseGenerator(api_key=st.session_state.get('api_key'))
                                 
@@ -734,7 +616,7 @@ def main():
                     ['Excel (.xlsx)', 'JSON (.json)', 'CSV (.csv)']
                 )
                 
-                if st.button("📤 Export Test Cases", type="primary", disabled=block_all_requests()):
+                if st.button("📤 Export Test Cases", type="primary"):
                     with st.spinner("Exporting test cases..."):
                         try:
                             # Initialize export manager
@@ -836,7 +718,7 @@ def main():
                 st.metric("Coverage %", f"{coverage_pct}%")
             
             # Export traceability matrix
-            if st.button("📤 Export Traceability Matrix", disabled=block_all_requests()):
+            if st.button("📤 Export Traceability Matrix"):
                 with st.spinner("Exporting traceability matrix..."):
                     try:
                         # Initialize traceability matrix generator
