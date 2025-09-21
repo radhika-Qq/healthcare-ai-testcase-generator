@@ -75,6 +75,25 @@ def get_enum_value(obj):
         return obj.value
     return str(obj)
 
+def is_request_in_progress(request_type: str) -> bool:
+    """Check if a specific type of request is already in progress."""
+    return st.session_state.get(f'{request_type}_in_progress', False)
+
+def set_request_status(request_type: str, in_progress: bool):
+    """Set the status of a specific request type."""
+    st.session_state[f'{request_type}_in_progress'] = in_progress
+
+def get_request_id(request_type: str, *args) -> str:
+    """Generate a unique request ID based on request type and arguments."""
+    import hashlib
+    content = f"{request_type}_{'_'.join(str(arg) for arg in args)}"
+    return hashlib.md5(content.encode()).hexdigest()[:8]
+
+def is_duplicate_request(request_type: str, request_id: str) -> bool:
+    """Check if this is a duplicate request."""
+    last_request = st.session_state.get(f'last_{request_type}_request', '')
+    return last_request == request_id
+
 def main():
     # Header
     st.markdown('<h1 class="main-header">🏥 Healthcare AI Test Case Generator</h1>', unsafe_allow_html=True)
@@ -142,9 +161,19 @@ def main():
                 
                 # Parse button
                 if st.button("🔍 Parse Document", type="primary", key="parse_uploaded"):
-                    # Check if already processing to prevent duplicate calls
-                    if 'processing' not in st.session_state or not st.session_state.processing:
-                        st.session_state.processing = True
+                    # Generate unique request ID
+                    request_id = get_request_id("parse_document", uploaded_file.name, uploaded_file.size)
+                    
+                    # Check for duplicate requests
+                    if is_duplicate_request("parse_document", request_id):
+                        st.warning("⚠️ This document is already being processed. Please wait...")
+                    elif is_request_in_progress("parse_document"):
+                        st.warning("⚠️ Another document is being processed. Please wait...")
+                    else:
+                        # Set request status and ID
+                        set_request_status("parse_document", True)
+                        st.session_state['last_parse_document_request'] = request_id
+                        
                         with st.spinner("Parsing document and extracting requirements..."):
                             try:
                                 # Parse the document
@@ -175,11 +204,9 @@ def main():
                                 else:
                                     st.info("💡 Try with a different file or check the file format")
                             finally:
-                                # Clean up temp file
+                                # Clean up temp file and reset status
                                 Path(temp_path).unlink(missing_ok=True)
-                                st.session_state.processing = False
-                    else:
-                        st.warning("⚠️ Document is already being processed. Please wait...")
+                                set_request_status("parse_document", False)
         
         with col2:
             st.markdown("#### 📋 Sample Document")
@@ -191,9 +218,19 @@ def main():
             """)
             
             if st.button("📥 Use Sample Document", key="use_sample"):
-                # Check if already processing to prevent duplicate calls
-                if 'processing' not in st.session_state or not st.session_state.processing:
-                    st.session_state.processing = True
+                # Generate unique request ID for sample document
+                request_id = get_request_id("sample_document", "medical_device_requirements.txt")
+                
+                # Check for duplicate requests
+                if is_duplicate_request("sample_document", request_id):
+                    st.warning("⚠️ Sample document is already being processed. Please wait...")
+                elif is_request_in_progress("sample_document") or is_request_in_progress("parse_document"):
+                    st.warning("⚠️ Another document is being processed. Please wait...")
+                else:
+                    # Set request status and ID
+                    set_request_status("sample_document", True)
+                    st.session_state['last_sample_document_request'] = request_id
+                    
                     sample_path = "sample_demo_data/medical_device_requirements.txt"
                     if Path(sample_path).exists():
                         with st.spinner("Loading sample document..."):
@@ -212,12 +249,10 @@ def main():
                                 else:
                                     st.info("💡 There was an issue loading the sample document. Please try uploading your own document.")
                             finally:
-                                st.session_state.processing = False
+                                set_request_status("sample_document", False)
                     else:
                         st.error("❌ Sample document not found")
-                        st.session_state.processing = False
-                else:
-                    st.warning("⚠️ Document is already being processed. Please wait...")
+                        set_request_status("sample_document", False)
         
         # Display parsed results
         if 'requirements' in st.session_state and st.session_state.requirements:
@@ -327,25 +362,41 @@ def main():
                 )
                 
                 if st.button("🚀 Generate Test Cases", type="primary"):
-                    with st.spinner("Generating test cases with AI..."):
-                        try:
-                            # Initialize test case generator
-                            generator = TestCaseGenerator()
-                            
-                            # Generate test cases
-                            test_cases = generator.generate_test_cases(
-                                st.session_state.requirements,
-                                st.session_state.compliance_mappings
-                            )
-                            
-                            # Store in session state
-                            st.session_state.test_cases = test_cases
-                            
-                            st.success(f"✅ Generated {len(test_cases)} test cases!")
-                            
-                        except Exception as e:
-                            st.error(f"❌ Error generating test cases: {str(e)}")
-                            st.info("💡 Make sure you have configured your API key in the sidebar")
+                    # Generate unique request ID for test case generation
+                    req_count = len(st.session_state.requirements) if st.session_state.requirements else 0
+                    request_id = get_request_id("generate_test_cases", req_count, str(test_types))
+                    
+                    # Check for duplicate requests
+                    if is_duplicate_request("generate_test_cases", request_id):
+                        st.warning("⚠️ Test cases are already being generated for these requirements. Please wait...")
+                    elif is_request_in_progress("generate_test_cases"):
+                        st.warning("⚠️ Test case generation is already in progress. Please wait...")
+                    else:
+                        # Set request status and ID
+                        set_request_status("generate_test_cases", True)
+                        st.session_state['last_generate_test_cases_request'] = request_id
+                        
+                        with st.spinner("Generating test cases with AI..."):
+                            try:
+                                # Initialize test case generator
+                                generator = TestCaseGenerator(api_key=st.session_state.get('api_key'))
+                                
+                                # Generate test cases
+                                test_cases = generator.generate_test_cases(
+                                    st.session_state.requirements,
+                                    st.session_state.compliance_mappings
+                                )
+                                
+                                # Store in session state
+                                st.session_state.test_cases = test_cases
+                                
+                                st.success(f"✅ Generated {len(test_cases)} test cases!")
+                                
+                            except Exception as e:
+                                st.error(f"❌ Error generating test cases: {str(e)}")
+                                st.info("💡 Make sure you have configured your API key in the sidebar")
+                            finally:
+                                set_request_status("generate_test_cases", False)
             
             with col2:
                 st.markdown("#### 🎯 Generation Options")
