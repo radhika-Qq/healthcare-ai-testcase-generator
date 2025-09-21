@@ -7,7 +7,6 @@ A simple web interface showcasing the core features of the Healthcare AI Test Ca
 import streamlit as st
 import json
 import pandas as pd
-import os
 from pathlib import Path
 import sys
 from datetime import datetime
@@ -16,16 +15,6 @@ import io
 # Add project root to path
 project_root = Path(__file__).parent
 sys.path.append(str(project_root))
-
-# Load environment variables from .env file
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-    print("✅ .env file loaded successfully")
-except ImportError:
-    print("⚠️ python-dotenv not available, environment variables may not be loaded")
-except Exception as e:
-    print(f"❌ Error loading .env file: {e}")
 
 # Import our modules
 try:
@@ -238,11 +227,6 @@ def main():
         
         # Check if API key is available from config
         config_api_key = Config.GOOGLE_AI_API_KEY
-        
-        # Debug: Show environment loading status
-        st.markdown("**Debug Info:**")
-        st.markdown(f"• Environment loaded: `{os.getenv('GOOGLE_AI_API_KEY', 'NOT_FOUND')[:10]}...`")
-        st.markdown(f"• Config value: `{config_api_key[:10] if config_api_key else 'NOT_FOUND'}...`")
         
         if config_api_key:
             # API key is available from config
@@ -542,7 +526,7 @@ def main():
                                 st.session_state.test_cases = test_cases
                                 
                                 st.success(f"✅ Generated {len(test_cases)} test cases!")
-                            
+                                
                             except Exception as e:
                                 st.error(f"❌ Error generating test cases: {str(e)}")
                                 st.info("💡 Make sure you have configured your API key in the sidebar")
@@ -731,9 +715,9 @@ def main():
                                               format_func=lambda x: options[x])
                     if selected_idx is not None:
                         tc = filtered_test_cases[selected_idx]
-                    else:
-                        st.warning("No test cases match the current filters")
-                        tc = None
+                else:
+                    st.warning("No test cases match the current filters")
+                    tc = None
                 
                 if tc is not None:
                     st.markdown(f"**Test Case: {getattr(tc, 'id', 'N/A')}**")

@@ -6,13 +6,6 @@ import os
 from pathlib import Path
 from typing import Optional
 
-# Load environment variables from .env file
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass  # python-dotenv not available
-
 
 class Config:
     """Configuration class for the Healthcare AI Test Case Generator."""
