@@ -58,6 +58,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Audit trail maintenance
 - Compliance with healthcare data regulations
 
+## [1.1.0] - 2025-01-20
+
+### Added
+- **Advanced AI Features**:
+  - Explainable AI module for compliance decision transparency
+  - Predictive prioritization using machine learning algorithms
+  - Support for OpenAI GPT models as alternative AI provider
+  - Anthropic Claude integration for enhanced AI processing
+- **Evidence Collection System**:
+  - Automated capture of execution logs, screenshots, and artifacts
+  - SQLite-based evidence storage and organization
+  - Audit-ready evidence packages for compliance validation
+- **Regulatory Monitoring**:
+  - Continuous monitoring of regulatory changes from official sources
+  - Automated alerts for compliance rule updates
+  - Impact analysis for regulatory changes on existing test cases
+- **Self-Healing Tests**:
+  - Automatic test maintenance and adaptation to system changes
+  - Change detection and test update recommendations
+  - Intelligent test case evolution based on system modifications
+- **Visual Regression Testing**:
+  - Automated UI change detection and visual testing
+  - Screenshot comparison and difference analysis
+  - Visual test case generation for UI components
+- **Enhanced CLI Interface**:
+  - Comprehensive command-line interface for all operations
+  - Batch processing capabilities
+  - Configuration management through CLI
+- **Improved Configuration**:
+  - Multi-provider AI configuration support
+  - Environment-specific settings
+  - Enhanced validation and error reporting
+
+### Enhanced
+- **Document Processing**: Added support for TXT files and improved HTML processing
+- **Export Formats**: Enhanced CSV export with better formatting
+- **Compliance Validation**: Improved accuracy and coverage of regulatory standards
+- **Traceability Matrix**: Enhanced traceability with change impact analysis
+- **Error Handling**: Comprehensive error handling and recovery mechanisms
+- **Logging**: Structured logging with multiple output formats
+
+### Technical Improvements
+- **Machine Learning Integration**: Scikit-learn for predictive analytics
+- **Image Processing**: PIL/Pillow for visual regression testing
+- **Database Support**: SQLite for evidence collection and storage
+- **API Flexibility**: Support for multiple AI providers with fallback mechanisms
+- **Performance**: Optimized processing for large documents and datasets
+
 ## [Unreleased]
 
 ### Planned Features

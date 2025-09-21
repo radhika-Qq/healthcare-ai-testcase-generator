@@ -9,8 +9,12 @@ The Healthcare AI Test Case Generator is a comprehensive, AI-powered tool design
 ### 🤖 AI-Powered Processing
 - **Google Vertex AI Integration**: Leverages advanced AI models for intelligent requirement extraction
 - **Gemini API Support**: Alternative AI processing with fallback capabilities
+- **OpenAI Integration**: Support for GPT models as alternative AI provider
+- **Anthropic Claude Support**: Additional AI model options for enhanced processing
 - **Natural Language Processing**: Understands healthcare-specific terminology and context
 - **Rule-Based Fallback**: Ensures reliability even when AI services are unavailable
+- **Explainable AI**: Provides human-readable explanations for AI decisions and compliance mapping
+- **Predictive Analytics**: ML-based test prioritization and risk assessment
 
 ### 📄 Multi-Format Document Support
 - **PDF Processing**: Extract requirements from PDF documents with preserved formatting
@@ -29,6 +33,10 @@ The Healthcare AI Test Case Generator is a comprehensive, AI-powered tool design
 - **Step-by-Step Actions**: Detailed test steps with expected results
 - **Test Data Requirements**: Automatic generation of test data specifications
 - **Priority Mapping**: Intelligent priority assignment based on requirement criticality
+- **Predictive Prioritization**: ML-based test case prioritization using historical defect data
+- **Self-Healing Tests**: Automatic test maintenance and adaptation to system changes
+- **Visual Regression Testing**: Automated UI change detection and visual testing
+- **Risk-Based Testing**: AI-powered risk assessment and test coverage optimization
 
 ### 📊 Enterprise Integration
 - **Multiple Export Formats**: JSON, Excel, CSV for various tools
@@ -39,8 +47,11 @@ The Healthcare AI Test Case Generator is a comprehensive, AI-powered tool design
 ### 🔗 Complete Traceability
 - **Requirement-to-Test Mapping**: Clear traceability from requirements to test cases
 - **Compliance Traceability**: Links test cases to regulatory standards
-- **Evidence Collection**: Tracks required evidence for compliance validation
+- **Evidence Collection**: Automated capture of execution logs, screenshots, and artifacts
 - **Coverage Analysis**: Identifies gaps in test coverage
+- **Regulatory Monitoring**: Continuous monitoring of regulatory changes and updates
+- **Audit Trail**: Comprehensive audit trail for compliance validation
+- **Change Impact Analysis**: Tracks impact of requirement changes on test cases
 
 ## Technical Architecture
 
@@ -55,16 +66,27 @@ Test Case Generation & Output Module
 ├── Test Case Generator
 ├── Compliance Validator
 ├── Export Manager
-└── Traceability Matrix Generator
+├── Traceability Matrix Generator
+├── Evidence Collection Engine
+├── Explainable AI System
+├── Predictive Prioritizer
+├── Regulatory Monitor
+├── Self-Healing Engine
+└── Visual Regression Engine
 ```
 
 ### Technology Stack
 - **Python 3.8+**: Core programming language
-- **Google Vertex AI**: AI-powered processing
+- **Google Vertex AI & Gemini**: Primary AI-powered processing
+- **OpenAI GPT**: Alternative AI processing
+- **Anthropic Claude**: Additional AI model support
+- **Scikit-learn**: Machine learning for predictive prioritization
 - **Pandas**: Data manipulation and analysis
 - **OpenPyXL**: Excel file processing
 - **PyPDF2**: PDF document parsing
 - **BeautifulSoup4**: HTML processing
+- **PIL/Pillow**: Image processing for visual regression
+- **SQLite**: Local data storage for evidence collection
 
 ## Project Structure
 

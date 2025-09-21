@@ -1,6 +1,6 @@
 # API Reference
 
-This document provides detailed API reference for the Healthcare AI Test Case Generator.
+This document provides detailed API reference for the Healthcare AI Test Case Generator, including all core modules and advanced AI-enhanced features.
 
 ## Input & Parsing Module
 
@@ -414,5 +414,357 @@ for tc in test_cases:
 # Export with compliance validation
 export_manager = ExportManager()
 export_manager.export_test_cases(test_cases, "compliant_tests.xlsx", "excel")
+```
+
+## Advanced AI Features
+
+### PredictivePrioritizer
+
+The `PredictivePrioritizer` class provides ML-based test case prioritization.
+
+#### Methods
+
+##### `__init__(model_path: Optional[str] = None)`
+
+Initialize the predictive prioritizer.
+
+**Parameters:**
+- `model_path`: Optional path to pre-trained model
+
+##### `predict_priority(test_case: TestCase, historical_data: List[Dict[str, Any]] = None) -> TestPriorityScore`
+
+Predict priority score for a test case.
+
+**Parameters:**
+- `test_case`: Test case to prioritize
+- `historical_data`: Optional historical test execution data
+
+**Returns:**
+- Test priority score with risk factors
+
+##### `batch_predict_priorities(test_cases: List[TestCase]) -> List[TestPriorityScore]`
+
+Predict priorities for multiple test cases.
+
+**Parameters:**
+- `test_cases`: List of test cases to prioritize
+
+**Returns:**
+- List of priority scores
+
+### ExplainableAI
+
+The `ExplainableAI` class provides human-readable explanations for AI decisions.
+
+#### Methods
+
+##### `__init__(explanation_db_path: str = "data/explanations.json")`
+
+Initialize the explainable AI system.
+
+**Parameters:**
+- `explanation_db_path`: Path to explanation database
+
+##### `explain_compliance_mapping(requirement_id: str, compliance_standard: str) -> ComplianceExplanation`
+
+Generate explanation for compliance mapping decision.
+
+**Parameters:**
+- `requirement_id`: ID of the requirement
+- `compliance_standard`: Compliance standard being mapped
+
+**Returns:**
+- Detailed compliance explanation
+
+##### `explain_test_case_generation(test_case: TestCase, requirement: Requirement) -> TestCaseExplanation`
+
+Generate explanation for test case generation.
+
+**Parameters:**
+- `test_case`: Generated test case
+- `requirement`: Source requirement
+
+**Returns:**
+- Detailed test case generation explanation
+
+### EvidenceCollector
+
+The `EvidenceCollector` class handles automated evidence collection.
+
+#### Methods
+
+##### `__init__(evidence_root_path: str = "./evidence")`
+
+Initialize the evidence collector.
+
+**Parameters:**
+- `evidence_root_path`: Root path for evidence storage
+
+##### `capture_screenshot(test_case_id: str, step_number: int, screenshot_path: str) -> EvidenceArtifact`
+
+Capture screenshot evidence for a test case.
+
+**Parameters:**
+- `test_case_id`: ID of the test case
+- `step_number`: Step number in the test case
+- `screenshot_path`: Path to screenshot file
+
+**Returns:**
+- Evidence artifact object
+
+##### `create_evidence_package(test_case_id: str) -> EvidencePackage`
+
+Create comprehensive evidence package for a test case.
+
+**Parameters:**
+- `test_case_id`: ID of the test case
+
+**Returns:**
+- Complete evidence package
+
+### RegulatoryMonitor
+
+The `RegulatoryMonitor` class monitors regulatory changes.
+
+#### Methods
+
+##### `__init__(monitoring_interval_hours: int = 24)`
+
+Initialize the regulatory monitor.
+
+**Parameters:**
+- `monitoring_interval_hours`: Hours between monitoring checks
+
+##### `start_monitoring() -> None`
+
+Start continuous regulatory monitoring.
+
+##### `check_for_changes() -> List[RegulatoryChange]`
+
+Check for new regulatory changes.
+
+**Returns:**
+- List of detected regulatory changes
+
+### SelfHealingEngine
+
+The `SelfHealingEngine` class provides self-healing test capabilities.
+
+#### Methods
+
+##### `__init__(healing_threshold: float = 0.8)`
+
+Initialize the self-healing engine.
+
+**Parameters:**
+- `healing_threshold`: Confidence threshold for healing actions
+
+##### `analyze_failure(test_case: TestCase, failure_log: str) -> List[HealAction]`
+
+Analyze test failure and suggest healing actions.
+
+**Parameters:**
+- `test_case`: Failed test case
+- `failure_log`: Failure log details
+
+**Returns:**
+- List of suggested healing actions
+
+##### `apply_healing(test_case: TestCase, heal_actions: List[HealAction]) -> TestCase`
+
+Apply healing actions to a test case.
+
+**Parameters:**
+- `test_case`: Test case to heal
+- `heal_actions`: List of healing actions to apply
+
+**Returns:**
+- Healed test case
+
+### VisualRegressionEngine
+
+The `VisualRegressionEngine` class handles visual regression testing.
+
+#### Methods
+
+##### `__init__(baseline_dir: str = "./data/visual_baselines")`
+
+Initialize the visual regression engine.
+
+**Parameters:**
+- `baseline_dir`: Directory for baseline images
+
+##### `capture_baseline(test_case_id: str, element_selector: str) -> VisualTestCase`
+
+Capture baseline image for visual testing.
+
+**Parameters:**
+- `test_case_id`: ID of the test case
+- `element_selector`: CSS selector for the element
+
+**Returns:**
+- Visual test case object
+
+##### `compare_visual(test_case: VisualTestCase, current_image_path: str) -> VisualTestResult`
+
+Compare current image with baseline.
+
+**Parameters:**
+- `test_case`: Visual test case
+- `current_image_path`: Path to current image
+
+**Returns:**
+- Visual test result with differences
+
+## Advanced Data Classes
+
+### TestPriorityScore
+
+Represents a test case priority score with risk factors.
+
+```python
+@dataclass
+class TestPriorityScore:
+    test_case_id: str
+    priority_score: float  # 0-100
+    risk_level: str  # critical, high, medium, low
+    risk_factors: List[RiskFactor]
+    confidence: float  # 0-1
+    recommendation: str
+    generated_at: str
+```
+
+### ComplianceExplanation
+
+Represents an explanation for compliance mapping.
+
+```python
+@dataclass
+class ComplianceExplanation:
+    requirement_id: str
+    compliance_standard: str
+    mapped_clause: str
+    confidence_score: float
+    reasoning_steps: List[str]
+    evidence_cited: List[str]
+    regulatory_context: str
+    human_readable_summary: str
+    generated_at: str
+```
+
+### EvidenceArtifact
+
+Represents an individual evidence artifact.
+
+```python
+@dataclass
+class EvidenceArtifact:
+    artifact_id: str
+    test_case_id: str
+    artifact_type: str  # screenshot, log, file, video, document
+    file_path: str
+    file_size: int
+    checksum: str
+    metadata: Dict[str, Any]
+    created_at: str
+    created_by: str
+```
+
+### RegulatoryChange
+
+Represents a detected regulatory change.
+
+```python
+@dataclass
+class RegulatoryChange:
+    change_id: str
+    standard: str
+    title: str
+    description: str
+    source_url: str
+    publication_date: str
+    change_type: str  # new, updated, deprecated, clarification
+    severity: str  # low, medium, high, critical
+    affected_requirements: List[str]
+    confidence: float
+    detected_at: str
+```
+
+## Advanced Usage Examples
+
+### Predictive Prioritization
+
+```python
+from test_case_generation.predictive_prioritization import PredictivePrioritizer
+
+# Initialize prioritizer
+prioritizer = PredictivePrioritizer()
+
+# Predict priorities for test cases
+priority_scores = prioritizer.batch_predict_priorities(test_cases)
+
+for score in priority_scores:
+    print(f"Test {score.test_case_id}: Priority {score.priority_score}, Risk {score.risk_level}")
+```
+
+### Explainable AI
+
+```python
+from test_case_generation.explainable_ai import ExplainableAI
+
+# Initialize explainable AI
+explainer = ExplainableAI()
+
+# Get explanation for compliance mapping
+explanation = explainer.explain_compliance_mapping("REQ-001", "FDA_21_CFR_820")
+print(explanation.human_readable_summary)
+```
+
+### Evidence Collection
+
+```python
+from test_case_generation.evidence_collection import EvidenceCollector
+
+# Initialize evidence collector
+collector = EvidenceCollector()
+
+# Capture evidence during test execution
+artifact = collector.capture_screenshot("TC-001", 1, "screenshot.png")
+
+# Create evidence package
+package = collector.create_evidence_package("TC-001")
+print(f"Evidence package created with {len(package.artifacts)} artifacts")
+```
+
+### Self-Healing Tests
+
+```python
+from test_case_generation.self_healing import SelfHealingEngine
+
+# Initialize self-healing engine
+healing_engine = SelfHealingEngine()
+
+# Analyze test failure
+heal_actions = healing_engine.analyze_failure(failed_test_case, failure_log)
+
+# Apply healing
+healed_test_case = healing_engine.apply_healing(failed_test_case, heal_actions)
+```
+
+### Visual Regression Testing
+
+```python
+from test_case_generation.visual_regression import VisualRegressionEngine
+
+# Initialize visual regression engine
+visual_engine = VisualRegressionEngine()
+
+# Capture baseline
+baseline = visual_engine.capture_baseline("TC-001", "#patient-form")
+
+# Compare with current state
+result = visual_engine.compare_visual(baseline, "current_screenshot.png")
+if result.has_differences:
+    print(f"Visual differences detected: {result.differences}")
 ```
 
